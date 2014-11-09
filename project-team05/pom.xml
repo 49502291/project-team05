@@ -167,8 +167,8 @@
 	</dependencies>
 
 	<scm>
-		<connection>scm:git:git@github.com:oaqa/DEIIS-project-archetype.git</connection>
-		<developerConnection>scm:git:git@github.com:oaqa/DEIIS-project-archetype.git</developerConnection>
+		<connection>scm:git:git@github.com:11693-5/project-team05.git</connection>
+		<developerConnection>scm:git:git@github.com:11693-5/project-team05.git</developerConnection>
 		<tag>HEAD</tag>
 	</scm>
 	<repositories>

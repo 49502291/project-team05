@@ -52,7 +52,7 @@ public class GoPubMedServiceExample {
     LinkedLifeDataServiceResponse.Result linkedLifeDataResult = service
             .findLinkedLifeDataEntitiesPaged(text, 0);
     System.out.println("LinkedLifeData: " + linkedLifeDataResult.getEntities().size());
-    /*for (LinkedLifeDataServiceResponse.Entity entity : linkedLifeDataResult.getEntities()) {
+    for (LinkedLifeDataServiceResponse.Entity entity : linkedLifeDataResult.getEntities()) {
       System.out.println(" > " + entity.getEntity());
       for (LinkedLifeDataServiceResponse.Relation relation : entity.getRelations()) {
         System.out.println("   - labels: " + relation.getLabels());
@@ -60,7 +60,7 @@ public class GoPubMedServiceExample {
         System.out.println("   - sub: " + relation.getSubj());
         System.out.println("   - obj: " + relation.getObj());
       }
-    }*/
+    }
     PubMedSearchServiceResponse.Result pubmedResult = service.findPubMedCitations(text, 0);
     System.out.println(pubmedResult.getSize());
   }

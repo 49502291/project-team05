@@ -88,7 +88,6 @@ public class GoPubMedServiceExample {
     writer.write("documents:" + pubmedResult.getSize());
     for (Document doc : pubmedResult.getDocuments()) {
       System.out.println("http://www.ncbi.nlm.nih.gov/pubmed/" + doc.getPmid());
-      writer.write("http://www.ncbi.nlm.nih.gov/pubmed/" + doc.getPmid());
     }
     writer.close();
   }

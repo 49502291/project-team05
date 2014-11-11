@@ -138,7 +138,6 @@
 			<artifactId>uimafit-core</artifactId>
 			<version>2.1.0</version>
 		</dependency>
-
 		<dependency>
 			<groupId>com.aliasi</groupId>
 			<artifactId>lingpipe</artifactId>
@@ -179,7 +178,7 @@
 
 		<repository>
 			<id>oaqa</id>
-			<url>http://mu.lti.cs.cmu.edu:8081/nexus/content/groups/course-dependencies</url>
+			<url>http://mu.lti.cs.cmu.edu:8081/nexus/content/repositories/course-dependencies</url>
 		</repository>
 	</repositories>
 	<distributionManagement>

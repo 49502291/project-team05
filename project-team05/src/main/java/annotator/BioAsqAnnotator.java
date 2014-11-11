@@ -111,7 +111,7 @@ public class BioAsqAnnotator extends JCasAnnotator_ImplBase {
 			    //System.out.println(pubmedResult.getSize());
 			} catch (IOException e) {
 			        e.printStackTrace();
-			    }
+			}
 		}
 	}
 

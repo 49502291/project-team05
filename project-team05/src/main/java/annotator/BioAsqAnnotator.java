@@ -6,11 +6,13 @@ import java.util.LinkedList;
 import java.util.List;
 
 import org.apache.commons.configuration.ConfigurationException;
+import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_component.JCasAnnotator_ImplBase;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.FSIterator;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.tcas.Annotation;
+import org.apache.uima.resource.ResourceInitializationException;
 
 import util.TypeFactory;
 import edu.cmu.lti.oaqa.bio.bioasq.services.GoPubMedService;
@@ -24,6 +26,17 @@ import edu.cmu.lti.oaqa.type.kb.Triple;
 
 public class BioAsqAnnotator extends JCasAnnotator_ImplBase {
 
+	private GoPubMedService service;
+	public void initializer(UimaContext aContext) throws ResourceInitializationException {
+		super.initialize(aContext);
+		try {
+			service = new GoPubMedService("project.properties");
+		} catch (ConfigurationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 	@Override
 	public void process(JCas aJCas) throws AnalysisEngineProcessException {
 		// TODO Auto-generated method stub
@@ -31,11 +44,8 @@ public class BioAsqAnnotator extends JCasAnnotator_ImplBase {
 		while(iter.hasNext())
 		{
 			Question qt = (Question) iter.next();
-			String text = qt.getText();
-			GoPubMedService service;
-			
+			String text = qt.getText();			
 			try {
-				service = new GoPubMedService("project.properties");
 				OntologyServiceResponse.Result diseaseOntologyResult = service
 			            .findDiseaseOntologyEntitiesPaged(text, 0);
 				List<String> uris = new LinkedList<String>();

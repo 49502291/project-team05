@@ -14,6 +14,7 @@ import edu.cmu.lti.oaqa.type.retrieval.Document;
 
 public class BioConsumer extends CasConsumer_ImplBase {
 
+	
 	@Override
 	public void processCas(CAS aCAS) throws ResourceProcessException {
 		// TODO Auto-generated method stub

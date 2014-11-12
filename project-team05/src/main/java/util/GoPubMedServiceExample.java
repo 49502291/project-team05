@@ -28,6 +28,7 @@ public class GoPubMedServiceExample {
 		e.printStackTrace();
 	}
 	FileWriter writer = new FileWriter(f, true); 
+
     String text = "Are there any DNMT3 proteins present in plants";
     GoPubMedService service = new GoPubMedService("./project.properties");
 

@@ -11,10 +11,12 @@ import org.apache.uima.analysis_component.JCasAnnotator_ImplBase;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.FSIterator;
 import org.apache.uima.jcas.JCas;
+import org.apache.uima.jcas.cas.StringList;
 import org.apache.uima.jcas.tcas.Annotation;
 import org.apache.uima.resource.ResourceInitializationException;
 
 import util.TypeFactory;
+import util.Utils;
 import edu.cmu.lti.oaqa.bio.bioasq.services.GoPubMedService;
 import edu.cmu.lti.oaqa.bio.bioasq.services.LinkedLifeDataServiceResponse;
 import edu.cmu.lti.oaqa.bio.bioasq.services.OntologyServiceResponse;
@@ -26,8 +28,8 @@ import edu.cmu.lti.oaqa.type.kb.Triple;
 
 public class BioAsqAnnotator extends JCasAnnotator_ImplBase {
 
-	private GoPubMedService service;
-	public void initializer(UimaContext aContext) throws ResourceInitializationException {
+	//private GoPubMedService service = null;
+	/*public void initializer(UimaContext aContext) throws ResourceInitializationException {
 		super.initialize(aContext);
 		try {
 			service = new GoPubMedService("project.properties");
@@ -35,7 +37,7 @@ public class BioAsqAnnotator extends JCasAnnotator_ImplBase {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	}
+	}*/
 	
 	@Override
 	public void process(JCas aJCas) throws AnalysisEngineProcessException {
@@ -44,9 +46,14 @@ public class BioAsqAnnotator extends JCasAnnotator_ImplBase {
 		while(iter.hasNext())
 		{
 			Question qt = (Question) iter.next();
-			String text = qt.getText();
+			String text = qt.getText().substring(0,qt.getText().length()-1);
+			//System.out.println(text);
 			if (text == null)
-				text  = "Is Rheumatoid Arthritis more common in men or women";	
+				text  = "Is Rheumatoid Arthritis more common in men or women";
+			GoPubMedService service;
+			try {
+				service = new GoPubMedService("./project.properties");
+			
 			try {
 				OntologyServiceResponse.Result diseaseOntologyResult = service
 			            .findDiseaseOntologyEntitiesPaged(text, 0);
@@ -57,7 +64,11 @@ public class BioAsqAnnotator extends JCasAnnotator_ImplBase {
 			    	/*System.out.println(" > " + finding.getConcept().getLabel() + " "
 			              + finding.getConcept().getUri());*/
 			    }
-			    Concept concept = TypeFactory.createConcept(aJCas, "diseaseOntology", uris, null);
+			    //System.out.println(uris.get(0));
+			    StringList uriList = Utils.createStringList(aJCas, uris);
+			    Concept concept = new Concept(aJCas);
+			    		//TypeFactory.createConcept(aJCas, "diseaseOntology", uris, null);
+			    concept.setUris(uriList);
 			    concept.addToIndexes();
 			    OntologyServiceResponse.Result geneOntologyResult = service.findGeneOntologyEntitiesPaged(text,
 			            0, 10);
@@ -113,6 +124,9 @@ public class BioAsqAnnotator extends JCasAnnotator_ImplBase {
 			    //System.out.println(pubmedResult.getSize());
 			} catch (IOException e) {
 			        e.printStackTrace();
+			}} catch (ConfigurationException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
 			}
 		}
 	}

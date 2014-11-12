@@ -30,7 +30,8 @@ public class GoPubMedServiceExample {
 	FileWriter writer = new FileWriter(f, true); 
 
     String text = "Are there any DNMT3 proteins present in plants";
-    GoPubMedService service = new GoPubMedService("project.properties");
+    GoPubMedService service = new GoPubMedService("./project.properties");
+
     OntologyServiceResponse.Result diseaseOntologyResult = service
             .findDiseaseOntologyEntitiesPaged(text, 0);
     writer.write("Disease ontology: " + diseaseOntologyResult.getFindings().size());

@@ -1,4 +1,4 @@
-package annotator;
+package edu.cmu.lti.f14.team05;
 
 import java.io.IOException;
 import java.util.Iterator;

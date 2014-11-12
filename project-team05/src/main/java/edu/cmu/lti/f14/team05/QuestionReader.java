@@ -1,4 +1,4 @@
-package reader;
+package edu.cmu.lti.f14.team05;
 
 import java.io.IOException;
 

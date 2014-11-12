@@ -1,4 +1,4 @@
-package consumer;
+package edu.cmu.lti.f14.team05;
 
 import org.apache.uima.cas.CAS;
 import org.apache.uima.cas.CASException;

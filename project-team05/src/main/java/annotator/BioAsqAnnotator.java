@@ -44,7 +44,9 @@ public class BioAsqAnnotator extends JCasAnnotator_ImplBase {
 		while(iter.hasNext())
 		{
 			Question qt = (Question) iter.next();
-			String text = qt.getText();			
+			String text = qt.getText();
+			if (text == null)
+				text  = "Is Rheumatoid Arthritis more common in men or women";	
 			try {
 				OntologyServiceResponse.Result diseaseOntologyResult = service
 			            .findDiseaseOntologyEntitiesPaged(text, 0);

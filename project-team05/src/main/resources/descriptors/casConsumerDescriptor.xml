@@ -9,12 +9,20 @@
     <vendor/>
     <configurationParameters/>
     <configurationParameterSettings/>
-    <typeSystemDescription/>
+    <typeSystemDescription>
+      <imports>
+        <import location="/Users/ningna/git/project-team05/project-team05/src/main/resources/type/OAQATypes.xml"/>
+      </imports>
+    </typeSystemDescription>
     <typePriorities/>
     <fsIndexCollection/>
     <capabilities>
       <capability>
-        <inputs/>
+        <inputs>
+          <type allAnnotatorFeatures="true">edu.cmu.lti.oaqa.type.kb.Triple</type>
+          <type allAnnotatorFeatures="true">edu.cmu.lti.oaqa.type.retrieval.Document</type>
+          <type allAnnotatorFeatures="true">edu.cmu.lti.oaqa.type.kb.Concept</type>
+        </inputs>
         <outputs/>
         <languagesSupported/>
       </capability>

@@ -34,11 +34,11 @@ public class BioConsumer extends CasConsumer_ImplBase {
 			e.printStackTrace();
 		}
 		FileWriter fout;
+		
 		try {
 			fout = new FileWriter("report.txt", true);
-			fout.write("Documents");
-			FSIterator<Annotation> it = jcas.getAnnotationIndex(Document.type)
-					.iterator();
+			//FSIterator<Annotation> it = jcas.getAnnotationIndex(Document.type)
+					//.iterator();
 //			while (it.hasNext()) {
 //				Document doc = (Document) it.next();
 //				fout.write(doc.getTitle());
@@ -62,18 +62,19 @@ public class BioConsumer extends CasConsumer_ImplBase {
 //				fout.write(triple.getPredicate());
 //				fout.write(triple.getSubject());
 //			}
-			it = jcas.getAnnotationIndex(Question.type)
+			FSIterator<Annotation> it = jcas.getAnnotationIndex(Question.type)
 					.iterator();
 			System.out.println("Triples");
 			while (it.hasNext()) {
 				Question q = (Question) it.next();
-				fout.write(q.getQuestionType());
-				fout.write(q.getSource());
-				fout.write(q.getText());
+				fout.write(q.getQuestionType() + "\n");
+				fout.write(q.getSource() + "\n");
+				fout.write(q.getText() + "\n");
 			}
 			fout.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
+			System.out.println("IOERROR!");
 			e.printStackTrace();
 		}
 	}

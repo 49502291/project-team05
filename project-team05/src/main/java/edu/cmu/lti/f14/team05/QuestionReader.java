@@ -22,8 +22,6 @@ import com.google.common.collect.Lists;
 import edu.cmu.lti.oaqa.type.input.*;
 import json.gson.Question;
 import json.gson.QuestionType;
-//import json.gson.Question;
-//import json.gson.QuestionType;
 import json.gson.TestQuestion;
 import json.gson.TestSet;
 import json.gson.TestSummaryQuestion;
@@ -48,8 +46,8 @@ public class QuestionReader extends CollectionReader_ImplBase {
 	
 	public void initialize() throws ResourceInitializationException {
 		
-		filePath = "/questions.json";
-		index =0;
+		filePath = (String) getConfigParameterValue("inputFile");
+		index = 0;
 		inputs = Lists.newArrayList();
 		testRun(filePath);
 		

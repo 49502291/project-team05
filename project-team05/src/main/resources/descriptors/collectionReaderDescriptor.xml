@@ -7,15 +7,29 @@
     <description/>
     <version>1.0</version>
     <vendor/>
-    <configurationParameters/>
+    <configurationParameters>
+      <configurationParameter>
+        <name>inputFile</name>
+        <description>question file location</description>
+        <type>String</type>
+        <multiValued>false</multiValued>
+        <mandatory>true</mandatory>
+      </configurationParameter>
+    </configurationParameters>
     <configurationParameterSettings/>
-    <typeSystemDescription/>
+    <typeSystemDescription>
+      <imports>
+        <import name="type.OAQATypes"/>
+      </imports>
+    </typeSystemDescription>
     <typePriorities/>
     <fsIndexCollection/>
     <capabilities>
       <capability>
         <inputs/>
-        <outputs/>
+        <outputs>
+          <type allAnnotatorFeatures="true">edu.cmu.lti.oaqa.type.input.Question</type>
+        </outputs>
         <languagesSupported/>
       </capability>
     </capabilities>

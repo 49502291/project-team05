@@ -7,11 +7,19 @@
     <description/>
     <version>1.0</version>
     <vendor/>
-    <configurationParameters/>
+    <configurationParameters>
+      <configurationParameter>
+        <name>inputFile</name>
+        <description>question file location</description>
+        <type>String</type>
+        <multiValued>false</multiValued>
+        <mandatory>true</mandatory>
+      </configurationParameter>
+    </configurationParameters>
     <configurationParameterSettings/>
     <typeSystemDescription>
       <imports>
-        <import location="/Users/ningna/git/project-team05/project-team05/src/main/resources/type/OAQATypes.xml"/>
+        <import location="../type/OAQATypes.xml"/>
       </imports>
     </typeSystemDescription>
     <typePriorities/>

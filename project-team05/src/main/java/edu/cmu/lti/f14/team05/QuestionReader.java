@@ -83,7 +83,7 @@ public class QuestionReader extends CollectionReader_ImplBase {
 //	    annotation.addToIndexes();
 	    
 	    
-	    addQuestionToIndex(inputs.get(index), "", jcas);
+	    addQuestionToIndex(inputs.get(index++), "", jcas);
 	}
 
 	@Override

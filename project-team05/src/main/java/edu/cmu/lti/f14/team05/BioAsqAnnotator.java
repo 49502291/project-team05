@@ -25,6 +25,8 @@ import edu.cmu.lti.oaqa.bio.bioasq.services.PubMedSearchServiceResponse.Document
 import edu.cmu.lti.oaqa.type.input.Question;
 import edu.cmu.lti.oaqa.type.kb.Concept;
 import edu.cmu.lti.oaqa.type.kb.Triple;
+import edu.cmu.lti.oaqa.type.retrieval.ConceptSearchResult;
+import edu.cmu.lti.oaqa.type.retrieval.TripleSearchResult;
 
 public class BioAsqAnnotator extends JCasAnnotator_ImplBase {
 
@@ -49,14 +51,17 @@ public class BioAsqAnnotator extends JCasAnnotator_ImplBase {
 		{
 			Question qt = (Question) iter.next();
 			String text = qt.getText().substring(0,qt.getText().length()-1);
-			//System.out.println(text);
+//			System.out.println(text);
 			if (text == null)
 				text  = "Is Rheumatoid Arthritis more common in men or women";
 //			GoPubMedService service;
 //			try {
 //				service = new GoPubMedService("./project.properties");
 			
+
 			try {
+				
+				int rankOfConcept = 1;
 				OntologyServiceResponse.Result diseaseOntologyResult = service
 			            .findDiseaseOntologyEntitiesPaged(text, 0);
 				List<String> uris = new LinkedList<String>();
@@ -67,7 +72,9 @@ public class BioAsqAnnotator extends JCasAnnotator_ImplBase {
 			    Concept concept = new Concept(aJCas);
 			    		//TypeFactory.createConcept(aJCas, "diseaseOntology", uris, null);
 			    concept.setUris(uriList);
-			    concept.addToIndexes();
+			    
+			    
+//			    concept.addToIndexes();
 			    
 			    /*OntologyServiceResponse.Result geneOntologyResult = service.findGeneOntologyEntitiesPaged(text,
 			            0, 10);
@@ -82,14 +89,23 @@ public class BioAsqAnnotator extends JCasAnnotator_ImplBase {
 			    OntologyServiceResponse.Result uniprotResult = service.findUniprotEntitiesPaged(text, 0);
 			    for (OntologyServiceResponse.Finding finding : uniprotResult.getFindings()) {
 			    }*/
+			 
+			    int rankOfTriple = 1;
 			    LinkedLifeDataServiceResponse.Result linkedLifeDataResult = service
 			            .findLinkedLifeDataEntitiesPaged(text, 0);
 			    for (LinkedLifeDataServiceResponse.Entity entity : linkedLifeDataResult.getEntities()) {
 			      for (LinkedLifeDataServiceResponse.Relation relation : entity.getRelations()) {
 			    	  Triple triple = TypeFactory.createTriple(aJCas, relation.getSubj(), relation.getPred(), relation.getObj());
-		              triple.addToIndexes();
+			    	  triple.addToIndexes();
+//			    	  TripleSearchResult resultOfTriple = TypeFactory.createTripleSearchResult(aJCas, triple);
+//			    	  resultOfTriple.setRank(rankOfTriple);
+//			    	  resultOfTriple.setQueryString(text);
+//			    	  resultOfTriple.setScore(entity.getScore());
+//			    	  resultOfTriple.addToIndexes(aJCas);
+//			    	  rankOfTriple++;
 			      }
 			    }
+			    
 			    PubMedSearchServiceResponse.Result pubmedResult = service.findPubMedCitations(text, 0);
 			    for (Document doc : pubmedResult.getDocuments()) {
 			    	String pmid = doc.getPmid();

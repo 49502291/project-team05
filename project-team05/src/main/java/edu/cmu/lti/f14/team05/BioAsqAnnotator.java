@@ -1,9 +1,6 @@
 package edu.cmu.lti.f14.team05;
 
 import java.io.IOException;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
 
 import org.apache.commons.configuration.ConfigurationException;
 import org.apache.uima.UimaContext;
@@ -11,19 +8,16 @@ import org.apache.uima.analysis_component.JCasAnnotator_ImplBase;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.FSIterator;
 import org.apache.uima.jcas.JCas;
-import org.apache.uima.jcas.cas.StringList;
 import org.apache.uima.jcas.tcas.Annotation;
 import org.apache.uima.resource.ResourceInitializationException;
 
 import util.TypeFactory;
-import util.Utils;
 import edu.cmu.lti.oaqa.bio.bioasq.services.GoPubMedService;
 import edu.cmu.lti.oaqa.bio.bioasq.services.LinkedLifeDataServiceResponse;
 import edu.cmu.lti.oaqa.bio.bioasq.services.OntologyServiceResponse;
 import edu.cmu.lti.oaqa.bio.bioasq.services.PubMedSearchServiceResponse;
 import edu.cmu.lti.oaqa.bio.bioasq.services.PubMedSearchServiceResponse.Document;
 import edu.cmu.lti.oaqa.type.input.Question;
-import edu.cmu.lti.oaqa.type.kb.Concept;
 import edu.cmu.lti.oaqa.type.kb.Triple;
 
 public class BioAsqAnnotator extends JCasAnnotator_ImplBase {
@@ -59,15 +53,15 @@ public class BioAsqAnnotator extends JCasAnnotator_ImplBase {
 			try {
 				OntologyServiceResponse.Result diseaseOntologyResult = service
 			            .findDiseaseOntologyEntitiesPaged(text, 0);
-				List<String> uris = new LinkedList<String>();
+				//List<String> uris = new LinkedList<String>();
 			    for (OntologyServiceResponse.Finding finding : diseaseOntologyResult.getFindings()) {
-			    	uris.add(finding.getConcept().getUri());
+			    	//uris.add(finding.getConcept().getUri());
+			    	
+			    	TypeFactory.createConceptSearchResult(aJCas,
+			    			TypeFactory.createConcept(aJCas, finding.getConcept().getLabel(), finding.getConcept().getUri()),
+			    			finding.getConcept().getUri())
+			    		.addToIndexes();
 			    }
-			    StringList uriList = Utils.createStringList(aJCas, uris);
-			    Concept concept = new Concept(aJCas);
-			    		//TypeFactory.createConcept(aJCas, "diseaseOntology", uris, null);
-			    concept.setUris(uriList);
-			    concept.addToIndexes();
 			    
 			    /*OntologyServiceResponse.Result geneOntologyResult = service.findGeneOntologyEntitiesPaged(text,
 			            0, 10);
@@ -87,7 +81,8 @@ public class BioAsqAnnotator extends JCasAnnotator_ImplBase {
 			    for (LinkedLifeDataServiceResponse.Entity entity : linkedLifeDataResult.getEntities()) {
 			      for (LinkedLifeDataServiceResponse.Relation relation : entity.getRelations()) {
 			    	  Triple triple = TypeFactory.createTriple(aJCas, relation.getSubj(), relation.getPred(), relation.getObj());
-		              triple.addToIndexes();
+		              TypeFactory.createTripleSearchResult(aJCas, triple, text)
+		              	.addToIndexes();
 			      }
 			    }
 			    PubMedSearchServiceResponse.Result pubmedResult = service.findPubMedCitations(text, 0);

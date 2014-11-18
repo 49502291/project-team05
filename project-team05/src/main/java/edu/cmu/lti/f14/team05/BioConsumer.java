@@ -4,17 +4,18 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Collection;
 
-
 import org.apache.uima.cas.CAS;
 import org.apache.uima.cas.CASException;
 import org.apache.uima.collection.CasConsumer_ImplBase;
 import org.apache.uima.jcas.JCas;
-
 import org.apache.uima.resource.ResourceInitializationException;
 import org.apache.uima.resource.ResourceProcessException;
 import org.apache.uima.util.ProcessTrace;
 
+import com.google.common.collect.Lists;
+
 import util.TypeUtil;
+import edu.cmu.lti.oaqa.type.input.Question;
 import edu.cmu.lti.oaqa.type.kb.Triple;
 import edu.cmu.lti.oaqa.type.retrieval.ConceptSearchResult;
 import edu.cmu.lti.oaqa.type.retrieval.Document;
@@ -41,14 +42,17 @@ public class BioConsumer extends CasConsumer_ImplBase {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 		try {
+			Question currentQuestion = TypeUtil.getQuestion(jcas);
+			fout.write("CurrentQuestion:" + currentQuestion.getText() + "\n");
+			fout.write("CurrentType:" + currentQuestion.getQuestionType() + "\n");
 			fout.write("Documents:\n");
 			Collection<Document> docCollection = TypeUtil.getRankedDocuments(jcas);
 		
 			if (!docCollection.isEmpty()) {
 				for (Document doc:docCollection) {
 					
-					fout.write(doc.getUri() + "\n");
 				}
 			}
 			

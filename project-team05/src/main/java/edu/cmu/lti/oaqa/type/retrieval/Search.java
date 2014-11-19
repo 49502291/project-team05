@@ -12,8 +12,8 @@ import org.apache.uima.jcas.cas.TOP;
 
 
 /** An object that holds a query and results for a search (text search, fact search, KB search, etc.)
- * Updated by JCasGen Sun Nov 09 22:43:35 EST 2014
- * XML source: /Users/Freddie/git/project-team05/project-team05/src/main/resources/aeDescriptor.xml
+ * Updated by JCasGen Tue Nov 18 18:25:55 EST 2014
+ * XML source: /Users/seven/git/project-team05/project-team05/src/main/resources/descriptors/aggregateDescriptor.xml
  * @generated */
 public class Search extends TOP {
   /** @generated

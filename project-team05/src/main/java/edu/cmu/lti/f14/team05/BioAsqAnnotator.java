@@ -95,7 +95,7 @@ public class BioAsqAnnotator extends JCasAnnotator_ImplBase {
 			    	String pmid = doc.getPmid();
 			    	String uri = "http://www.ncbi.nlm.nih.gov/pubmed/" + pmid;
 			    	edu.cmu.lti.oaqa.type.retrieval.Document document = 
-							TypeFactory.createDocument(aJCas, uri, pmid);
+							TypeFactory.createDocument(aJCas, uri, pmid,text);
 			    	document.addToIndexes();
 			    }
 			} catch (IOException e) {

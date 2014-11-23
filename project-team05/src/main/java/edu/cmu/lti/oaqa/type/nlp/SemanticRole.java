@@ -11,8 +11,8 @@ import org.apache.uima.jcas.tcas.Annotation;
 
 
 /** A semantic role label.
- * Updated by JCasGen Sun Nov 09 22:43:35 EST 2014
- * XML source: /Users/Freddie/git/project-team05/project-team05/src/main/resources/aeDescriptor.xml
+ * Updated by JCasGen Fri Nov 21 10:46:07 EST 2014
+ * XML source: /Users/NingnaWang/git/project-team05/project-team05/src/main/resources/descriptors/TripleDescriptor.xml
  * @generated */
 public class SemanticRole extends Annotation {
   /** @generated

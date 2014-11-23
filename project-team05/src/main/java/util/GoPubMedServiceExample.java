@@ -53,7 +53,7 @@ public class GoPubMedServiceExample {
     System.out.println("Jochem: " + jochemResult.getFindings().size());
     for (OntologyServiceResponse.Finding finding : jochemResult.getFindings()) {
       System.out.println(" > " + finding.getConcept().getLabel() + " "
-              + finding.getConcept().getUri());
+    		  + finding.getConcept().getUri());
     }
     OntologyServiceResponse.Result meshResult = service.findMeshEntitiesPaged(text, 0);
     System.out.println("MeSH: " + meshResult.getFindings().size());
@@ -81,7 +81,7 @@ public class GoPubMedServiceExample {
         writer.write("   - labels: " + relation.getLabels());
         writer.write("   - pred: " + relation.getPred());
         writer.write("   - sub: " + relation.getSubj());
-        writer.write("   - obj: " + relation.getObj());
+        writer.write("   - obj: " + relation.getObj());	
       }
     }
     PubMedSearchServiceResponse.Result pubmedResult = service.findPubMedCitations(text, 0);
@@ -91,6 +91,10 @@ public class GoPubMedServiceExample {
     for (Document doc : pubmedResult.getDocuments()) {
       System.out.println("http://www.ncbi.nlm.nih.gov/pubmed/" + doc.getPmid());
     }
+    
+    
+   
     writer.close();
-  }
+
+  }	
 }

@@ -17,7 +17,7 @@
     <casProcessors casPoolSize="3" processingUnitThreadCount="1">
         <casProcessor deployment="integrated" name="aeDescriptor">
             <descriptor>
-                <import location="descriptors/aeDescriptor.xml"/>
+                <import location="descriptors/aggregateDescriptor.xml"/>
             </descriptor>
             <deploymentParameters/>
             <errorHandling>

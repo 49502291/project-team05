@@ -81,13 +81,14 @@ public class BioConsumer extends CasConsumer_ImplBase {
 			fout.write("Documents:\n");
 			String queryId = TypeUtil.getQuestion(jcas).getId();
 			List<String> docResult = goldDocs.get(queryId);
+			
 			Collection<Document> docCollection = TypeUtil.getRankedDocuments(jcas);
 			LinkedList<Document> documentList = new LinkedList<Document>();
 			documentList.addAll(docCollection);
 			if (!documentList.isEmpty()){
 				for (Document doc: documentList){
 					fout.write(doc.getUri() + "\n");
-					if(docResult.contains(doc))
+					if(docResult.contains(doc.getUri()))
 						tpOfDocument++;
 				}
 			}
@@ -122,7 +123,7 @@ public class BioConsumer extends CasConsumer_ImplBase {
 			if (!conceptList.isEmpty()){
 				for (ConceptSearchResult concept: conceptList){
 					fout.write(concept.getUri() + "\n");
-					if(conceptResult.contains(concept))
+					if(conceptResult.contains(concept.getUri()))
 						tpOfConcept++;
 				}
 			}
@@ -133,9 +134,6 @@ public class BioConsumer extends CasConsumer_ImplBase {
 			else
 				FScoreOfConcept = 2.0 * precisionOfConcept * recallOfConcept 
 				/ (precisionOfConcept + recallOfConcept);
-//			for (ConceptSearchResult result: conceptCollection) {
-//				fout.write(result.getUri() + "\n");
-//			}
 	
 			fout.write("\n");
 			fout.write("Precision of concept is:\n");
@@ -147,6 +145,8 @@ public class BioConsumer extends CasConsumer_ImplBase {
 			
 			fout.write("Triples:\n");
 			List<Triple> tripleResult = goldTriples.get(queryId);
+			System.out.println("***************");
+			System.out.println(queryId);
 			Collection<TripleSearchResult> tripleCollection = TypeUtil.getRankedTripleSearchResults(jcas);
 			LinkedList<TripleSearchResult> tripleList = new LinkedList<TripleSearchResult>();
 			tripleList.addAll(tripleCollection);
@@ -175,13 +175,13 @@ public class BioConsumer extends CasConsumer_ImplBase {
 //			fout.write("F score of triple is:\n");
 //			fout.write( FScoreOfTriple + "\n");
 			
-//			for (TripleSearchResult result: tripleCollection) {
-//				if (result != null) {
-//					edu.cmu.lti.oaqa.type.kb.Triple t = result.getTriple();
-//					if (t != null)
-//						fout.write(t.getObject() + "\n");
-//				}
-//			}
+			for (TripleSearchResult result: tripleCollection) {
+				if (result != null) {
+					edu.cmu.lti.oaqa.type.kb.Triple t = result.getTriple();
+					if (t != null)
+						fout.write(t.getObject() + "\n");
+				}
+			}
 			
 			
 		} catch (IOException e) {

@@ -24,6 +24,7 @@ import util.TypeUtil;
 //import edu.cmu.lti.oaqa.type.kb.Triple;
 import edu.cmu.lti.oaqa.type.retrieval.ConceptSearchResult;
 import edu.cmu.lti.oaqa.type.retrieval.Document;
+import edu.cmu.lti.oaqa.type.retrieval.Passage;
 import edu.cmu.lti.oaqa.type.retrieval.TripleSearchResult;
 
 public class BioConsumer extends CasConsumer_ImplBase {
@@ -78,6 +79,7 @@ public class BioConsumer extends CasConsumer_ImplBase {
 			e.printStackTrace();
 		}
 		try {
+			fout.write("Question: "+TypeUtil.getQuestion(jcas).getText() +"\n");
 			fout.write("Documents:\n");
 			String queryId = TypeUtil.getQuestion(jcas).getId();
 			List<String> docResult = goldDocs.get(queryId);
@@ -150,40 +152,43 @@ public class BioConsumer extends CasConsumer_ImplBase {
 			Collection<TripleSearchResult> tripleCollection = TypeUtil.getRankedTripleSearchResults(jcas);
 			LinkedList<TripleSearchResult> tripleList = new LinkedList<TripleSearchResult>();
 			tripleList.addAll(tripleCollection);
-//			if (!tripleList.isEmpty()){
-//				for (TripleSearchResult triple: tripleList){
-//					if (triple != null) {
-//						edu.cmu.lti.oaqa.type.kb.Triple t = triple.getTriple();
-//						fout.write(t.getObject() + "\n");
-//						if(tripleResult.contains(t))
-//							tpOfTriple++;
-//					}
-//				}
-//			}
-//			precisionOfTriple = (tpOfTriple * 1.0) / tripleList.size() * 1.0;
-//			recallOfTriple = (tpOfTriple * 1.0) / tripleResult.size() * 1.0;
-//			if (precisionOfTriple == 0 && recallOfTriple == 0)
-//				FScoreOfTriple = 0.0;
-//			else
-//				FScoreOfTriple = 2.0 * precisionOfTriple * recallOfTriple 
-//				/ (precisionOfTriple + recallOfTriple);
-//			fout.write("\n");
-//			fout.write("Precision of triple is:\n");
-//			fout.write( precisionOfTriple + "\n");
-//			fout.write("Recall of triple is:\n");
-//			fout.write( recallOfTriple + "\n");
-//			fout.write("F score of triple is:\n");
-//			fout.write( FScoreOfTriple + "\n");
 			
 			for (TripleSearchResult result: tripleCollection) {
 				if (result != null) {
 					edu.cmu.lti.oaqa.type.kb.Triple t = result.getTriple();
-					if (t != null)
-						fout.write(t.getObject() + "\n");
+					if (t != null /*&& t.getSubject()!= null && t.getObject()!= null && t.getPredicate()!= null*/) {
+						fout.write("Subject:" + t.getSubject() + "\n");
+						fout.write("Object:" + t.getObject() + "\n");
+						fout.write("Predicate:" + t.getPredicate() + "\n");
+						for (int i=0;i<tripleResult.size();i++) {
+							if (t.getSubject() == tripleResult.get(i).getS()) {
+								tpOfTriple++;
+							}
+						}
+					}
 				}
 			}
+			precisionOfTriple = (tpOfTriple * 1.0) / tripleList.size() * 1.0;
+			recallOfTriple = (tpOfTriple * 1.0) / tripleResult.size() * 1.0;
+			if (precisionOfTriple == 0 && recallOfTriple == 0)
+				FScoreOfTriple = 0.0;
+			else
+				FScoreOfTriple = 2.0 * precisionOfTriple * recallOfTriple 
+				/ (precisionOfTriple + recallOfTriple);
+			fout.write("\n");
+			fout.write("Precision of triple is:\n");
+			fout.write( precisionOfTriple + "\n");
+			fout.write("Recall of triple is:\n");
+			fout.write( recallOfTriple + "\n");
+			fout.write("F score of triple is:\n");
+			fout.write( FScoreOfTriple + "\n");
 			
 			
+			fout.write("Passages:\n");
+			Collection<Passage> passageCollection = TypeUtil.getRankedPassages(jcas);
+			for (Passage passage : passageCollection) {
+				fout.write(passage.getText() + "\n");
+			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

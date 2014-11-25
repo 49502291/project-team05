@@ -323,7 +323,7 @@ public class TypeFactory {
     ret.setSearchId(searchId);
     ret.setCandidateAnswers(FSCollectionFactory.createFSArray(jcas, candidateAnswers));
     ret.setTitle(title);
-    ret.setDocId(title);
+    ret.setDocId(docId);
     return ret;
   }
 
@@ -339,6 +339,13 @@ public class TypeFactory {
             TypeConstants.SEARCH_ID_UNKNOWN, new ArrayList<>(), TypeConstants.TITLE_UNKNOWN, docId);
   }
 
+  public static Document createDocument(JCas jcas, String uri, String docId, String query) {
+	    return createDocument(jcas, uri, TypeConstants.SCORE_UNKNOWN, TypeConstants.TEXT_UNKNOWN,
+	            TypeConstants.RANK_UNKNOWN, query,
+	            TypeConstants.SEARCH_ID_UNKNOWN, new ArrayList<>(), TypeConstants.TITLE_UNKNOWN, docId);
+	  }
+
+  
   public static Document createDocument(JCas jcas, String uri) {
     return createDocument(jcas, uri, TypeConstants.SCORE_UNKNOWN, TypeConstants.TEXT_UNKNOWN,
             TypeConstants.RANK_UNKNOWN, TypeConstants.QUERY_STRING_UNKNOWN,

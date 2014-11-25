@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<analysisEngineDescription xmlns="http://uima.apache.org/resourceSpecifier">
+  <frameworkImplementation>org.apache.uima.java</frameworkImplementation>
+  <primitive>false</primitive>  
+  <delegateAnalysisEngineSpecifiers>
+    <delegateAnalysisEngine key="DocumentDescriptor">
+      <import location="/Users/seanhan/workspace/bioQA/project-team05/src/main/resources/descriptors/DocumentDescriptor.xml"/>
+    </delegateAnalysisEngine>
+    <delegateAnalysisEngine key="ConceptDescriptor">
+      <import location="/Users/seanhan/workspace/bioQA/project-team05/src/main/resources/descriptors/ConceptDescriptor.xml"/>
+    </delegateAnalysisEngine>
+  <delegateAnalysisEngine key="TripleDescriptor">
+      <import location="/Users/seanhan/workspace/bioQA/project-team05/src/main/resources/descriptors/TripleDescriptor.xml"/>
+    </delegateAnalysisEngine>
+    <delegateAnalysisEngine key="SnippetDescriptor">
+      <import location="/Users/seanhan/workspace/bioQA/project-team05/src/main/resources/descriptors/SnippetDescriptor.xml"/>
+    </delegateAnalysisEngine>
+  </delegateAnalysisEngineSpecifiers>
+  <analysisEngineMetaData>
+    <name>aggregateDescriptor</name>
+    <description/>
+    <version>1.0</version>
+    <vendor/>
+    <configurationParameters/>
+    <configurationParameterSettings/>
+    <flowConstraints>
+      <fixedFlow>
+        <node>DocumentDescriptor</node>
+        <node>ConceptDescriptor</node>
+      <node>TripleDescriptor</node>
+        <node>SnippetDescriptor</node>
+      </fixedFlow>
+    </flowConstraints>
+    <fsIndexCollection/>
+    <capabilities>
+      <capability>
+        <inputs/>
+        <outputs/>
+        <languagesSupported/>
+      </capability>
+    </capabilities>
+  <operationalProperties>
+      <modifiesCas>true</modifiesCas>
+      <multipleDeploymentAllowed>true</multipleDeploymentAllowed>
+      <outputsNewCASes>false</outputsNewCASes>
+    </operationalProperties>
+  </analysisEngineMetaData>
+  <resourceManagerConfiguration/>
+</analysisEngineDescription>

@@ -34,8 +34,8 @@ public class JsonCollectionReaderHelper {
 		jsHelper.testRun();
 	}
 
-	public void testRun() {
-		String filePath = "/questions.json";
+	public List<TestQuestion> testRun() {
+		String filePath = "/BioASQ-SampleData1B.json";
 		List<TestQuestion> inputs;
 		inputs = Lists.newArrayList();
 	/*	InputStream stream = getClass().getResourceAsStream(filePath);
@@ -51,6 +51,7 @@ public class JsonCollectionReaderHelper {
 					.load(getClass().getResourceAsStream(
 							String.class.cast(value))).stream()
 					.collect(toList());
+
 		} else if (String[].class.isAssignableFrom(value.getClass())) {
 			inputs = Arrays
 					.stream(String[].class.cast(value))
@@ -66,8 +67,10 @@ public class JsonCollectionReaderHelper {
 				.forEach(
 						input -> input.setBody(input.getBody().trim()
 								.replaceAll("\\s+", " ")));
-		System.out.println("concepts");
-		System.out.println(inputs.get(0).getBody());
+
+//		System.out.println("concepts");
+//		System.out.println(inputs.get(0).getBody());
+		return inputs;
 	}
 
 	

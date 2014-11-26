@@ -2,6 +2,7 @@ package edu.cmu.lti.f14.team05;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -21,10 +22,11 @@ import org.apache.uima.resource.ResourceProcessException;
 import org.apache.uima.util.ProcessTrace;
 
 import util.TypeUtil;
-//import edu.cmu.lti.oaqa.type.kb.Triple;
+import edu.cmu.lti.oaqa.type.input.Question;
 import edu.cmu.lti.oaqa.type.retrieval.ConceptSearchResult;
 import edu.cmu.lti.oaqa.type.retrieval.Document;
 import edu.cmu.lti.oaqa.type.retrieval.Passage;
+//import edu.cmu.lti.oaqa.type.kb.Triple;
 import edu.cmu.lti.oaqa.type.retrieval.TripleSearchResult;
 
 public class BioConsumer extends CasConsumer_ImplBase {
@@ -34,6 +36,7 @@ public class BioConsumer extends CasConsumer_ImplBase {
 	Map<String, List<Triple>> goldTriples;
 	List<TestQuestion> goldStandards;
 	JsonCollectionReaderHelper jsonHelper;
+	List<Double> docPrecisionList;
 	
 	
 	@Override
@@ -54,6 +57,8 @@ public class BioConsumer extends CasConsumer_ImplBase {
 			goldConcepts.put(question.getId(), question.getConcepts());
 			goldTriples.put(question.getId(), question.getTriples());
 		}
+		
+		docPrecisionList = new ArrayList<Double>();
 	}
 	@Override
 	public void processCas(CAS aCAS) throws ResourceProcessException {
@@ -78,13 +83,19 @@ public class BioConsumer extends CasConsumer_ImplBase {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 		try {
-			fout.write("Question: "+TypeUtil.getQuestion(jcas).getText() +"\n");
+			Question currentQuestion = TypeUtil.getQuestion(jcas);
+			fout.write("CurrentQuestion:" + currentQuestion.getText() + "\n");
+			fout.write("CurrentType:" + currentQuestion.getQuestionType() + "\n");
+
+
 			fout.write("Documents:\n");
 			String queryId = TypeUtil.getQuestion(jcas).getId();
 			List<String> docResult = goldDocs.get(queryId);
 			
 			Collection<Document> docCollection = TypeUtil.getRankedDocuments(jcas);
+
 			LinkedList<Document> documentList = new LinkedList<Document>();
 			documentList.addAll(docCollection);
 			if (!documentList.isEmpty()){
@@ -101,12 +112,8 @@ public class BioConsumer extends CasConsumer_ImplBase {
 			else
 				FScoreOfDocument = 2.0 * precisionOfDocument * recallOfDocument 
 				/ (precisionOfDocument + recallOfDocument);
-//			if (!docCollection.isEmpty()) {
-//				for (Document doc:docCollection) {
-//					
-//					fout.write(doc.getUri() + "\n");
-//				}
-//			}
+
+			docPrecisionList.add(precisionOfDocument);
 			fout.write("\n");
 			fout.write("Precision of document is:\n");
 			fout.write( precisionOfDocument + "\n");
@@ -124,7 +131,7 @@ public class BioConsumer extends CasConsumer_ImplBase {
 			conceptList.addAll(conceptCollection);
 			if (!conceptList.isEmpty()){
 				for (ConceptSearchResult concept: conceptList){
-					fout.write(concept.getUri() + "\n");
+					//fout.write(concept.getUri() + "\n");
 					if(conceptResult.contains(concept.getUri()))
 						tpOfConcept++;
 				}
@@ -198,6 +205,7 @@ public class BioConsumer extends CasConsumer_ImplBase {
 	@Override
 	public void collectionProcessComplete(ProcessTrace arg0) throws ResourceProcessException,
     IOException {
+		fout.write("Precision List of Documents:"  + docPrecisionList.toString() + "\n");
 		fout.close();
 	}
 

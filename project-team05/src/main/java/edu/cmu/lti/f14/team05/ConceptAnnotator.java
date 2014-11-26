@@ -44,14 +44,11 @@ private GoPubMedService service = null;
 
 		FSIterator<Annotation> iter = aJCas.getAnnotationIndex(Question.type).iterator();
 		int rankOfConcept;
-		while(iter.hasNext())
-		{
+		while(iter.hasNext()) {
 			Question qt = (Question) iter.next();
-			String text = qt.getText().substring(0,qt.getText().length()-1); //remove "?"
-			text = text.replaceAll("[^a-zA-Z0-9]+", " ");//remove punctuations
-		
-			if (text == null)
-				text  = "Is Rheumatoid Arthritis more common in men or women";
+			String text = qt.getText();
+			
+			text = QueryUtil.preprocess(text);
 		
 			/*
 			 * Disease Ontology

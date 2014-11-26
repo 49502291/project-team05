@@ -4,16 +4,16 @@
   <primitive>false</primitive>  
   <delegateAnalysisEngineSpecifiers>
     <delegateAnalysisEngine key="DocumentDescriptor">
-      <import location="/Users/seanhan/workspace/bioQA/project-team05/src/main/resources/descriptors/DocumentDescriptor.xml"/>
+      <import location="DocumentDescriptor.xml"/>
     </delegateAnalysisEngine>
     <delegateAnalysisEngine key="ConceptDescriptor">
-      <import location="/Users/seanhan/workspace/bioQA/project-team05/src/main/resources/descriptors/ConceptDescriptor.xml"/>
+      <import location="ConceptDescriptor.xml"/>
     </delegateAnalysisEngine>
   <delegateAnalysisEngine key="TripleDescriptor">
-      <import location="/Users/seanhan/workspace/bioQA/project-team05/src/main/resources/descriptors/TripleDescriptor.xml"/>
+      <import location="TripleDescriptor.xml"/>
     </delegateAnalysisEngine>
     <delegateAnalysisEngine key="SnippetDescriptor">
-      <import location="/Users/seanhan/workspace/bioQA/project-team05/src/main/resources/descriptors/SnippetDescriptor.xml"/>
+      <import location="SnippetDescriptor.xml"/>
     </delegateAnalysisEngine>
   </delegateAnalysisEngineSpecifiers>
   <analysisEngineMetaData>
@@ -25,10 +25,7 @@
     <configurationParameterSettings/>
     <flowConstraints>
       <fixedFlow>
-        <node>DocumentDescriptor</node>
         <node>ConceptDescriptor</node>
-      <node>TripleDescriptor</node>
-        <node>SnippetDescriptor</node>
       </fixedFlow>
     </flowConstraints>
     <fsIndexCollection/>

@@ -86,12 +86,12 @@ public class BioConsumer extends CasConsumer_ImplBase {
 		
 		try {
 			Question currentQuestion = TypeUtil.getQuestion(jcas);
+			String queryId = TypeUtil.getQuestion(jcas).getId();
 			fout.write("CurrentQuestion:" + currentQuestion.getText() + "\n");
 			fout.write("CurrentType:" + currentQuestion.getQuestionType() + "\n");
 
-
 			fout.write("Documents:\n");
-			String queryId = TypeUtil.getQuestion(jcas).getId();
+			
 			List<String> docResult = goldDocs.get(queryId);
 			
 			Collection<Document> docCollection = TypeUtil.getRankedDocuments(jcas);
@@ -131,7 +131,7 @@ public class BioConsumer extends CasConsumer_ImplBase {
 			conceptList.addAll(conceptCollection);
 			if (!conceptList.isEmpty()){
 				for (ConceptSearchResult concept: conceptList){
-					//fout.write(concept.getUri() + "\n");
+					fout.write(concept.getUri() + "\n");
 					if(conceptResult.contains(concept.getUri()))
 						tpOfConcept++;
 				}

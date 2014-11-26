@@ -54,6 +54,7 @@ private GoPubMedService service = null;
 			 * Disease Ontology
 			 */
 			try {
+				System.out.println("Finding disease ontology for:" + text);
 				OntologyServiceResponse.Result diseaseOntologyResult = service
 			            .findDiseaseOntologyEntitiesPaged(text, 0);
 				rankOfConcept = 1;
@@ -78,6 +79,8 @@ private GoPubMedService service = null;
 			 * Gene Ontology
 			 */
 			try {
+				
+				System.out.println("Finding gene ontology for:" + text);
 				OntologyServiceResponse.Result geneOntologyResult = service
 			            .findGeneOntologyEntitiesPaged(text, 0);
 				rankOfConcept = 1;
@@ -103,6 +106,7 @@ private GoPubMedService service = null;
 			 * Jochem Entities
 			 */
 			try {
+				System.out.println("Finding jochem ontology for:" + text);
 				OntologyServiceResponse.Result jochemEntitiesResult = service
 			            .findJochemEntitiesPaged(text, 0);
 				rankOfConcept = 1;
@@ -127,6 +131,7 @@ private GoPubMedService service = null;
 			 * Mesh Entities
 			 */	
 			try {
+				System.out.println("Finding mesh ontology for:" + text);
 				OntologyServiceResponse.Result meshResult = service
 			            .findMeshEntitiesPaged(text, 0);
 				rankOfConcept = 1;
@@ -151,6 +156,7 @@ private GoPubMedService service = null;
 			 * Uniprot Entities
 			 */
 			try {
+				System.out.println("Finding uniprot ontology for:" + text);
 				OntologyServiceResponse.Result uniprotResult = service
 			            .findUniprotEntitiesPaged(text, 0);
 				rankOfConcept = 1;

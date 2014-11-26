@@ -6,11 +6,6 @@
             "id": "5118dd1305c10fae75000001"
         }, 
         {
-            "body": "Are there any DNMT3 proteins present in plants?", 
-            "type": "yesno", 
-            "id": "511a16f9df1ebcce7d000005"
-        }, 
-        {
             "body": "What is the most prominent sequence consensus for the polyadenylation site?", 
             "type": "list", 
             "id": "5133b9455274a5fb0700000c"
@@ -19,11 +14,6 @@
             "body": "What is the function of the mammalian gene Irg1?", 
             "type": "summary", 
             "id": "513832a75274a5fb07000012"
-        }, 
-        {
-            "body": "Is thrombophilia related to increased risk of miscarriage?", 
-            "type": "yesno", 
-            "id": "513cdc38bee46bd34c000007"
         }, 
         {
             "body": "Which extra thyroid tissues have thyrotropin (TSH) receptors?", 
@@ -51,11 +41,6 @@
             "id": "51485a4dd24251bc0500002a"
         }, 
         {
-            "body": "Is Mammaprint approved by the United States Food and Drug Administration?", 
-            "type": "yesno", 
-            "id": "51487821d24251bc0500002f"
-        }, 
-        {
             "body": "Which acetylcholinesterase inhibitors are used for treatment of myasthenia gravis?", 
             "type": "list", 
             "id": "5149199dd24251bc05000040"
@@ -66,29 +51,9 @@
             "id": "5149f494d24251bc0500004c"
         }, 
         {
-            "body": "Does the Oncotype DX test work with paraffin embedded tissues?", 
-            "type": "yesno", 
-            "id": "514a0f0ad24251bc05000052"
-        }, 
-        {
-            "body": "Is depression associated with poor prognosis of brain tumor patients?", 
-            "type": "yesno", 
-            "id": "514cc8dcd24251bc05000066"
-        }, 
-        {
             "body": "What is known about the reimbursement of Viagra", 
             "type": "summary", 
             "id": "5150b45ad24251bc0500006f"
-        }, 
-        {
-            "body": "Does HER2 under-expression lead to favorable response to trastuzumab?", 
-            "type": "yesno", 
-            "id": "51542eacd24251bc05000084"
-        }, 
-        {
-            "body": "Can Alzheimer's disease related miRNAs be detected in patients' blood?", 
-            "type": "yesno", 
-            "id": "5156beb4d24251bc05000089"
         }, 
         {
             "body": "Which antiepileptic drug is most strongly associated with spina bifida? ", 
@@ -129,11 +94,6 @@
             "body": "Which histone marks are deposited by Set7?", 
             "type": "list", 
             "id": "5160412d298dcd4e5100003c"
-        }, 
-        {
-            "body": "Are there any desmins present in plants?", 
-            "type": "yesno", 
-            "id": "5162e011298dcd4e51000049"
         }, 
         {
             "body": "Is it possible to detect survivin protein expression in normal human adult tissues?", 

@@ -48,8 +48,8 @@ private GoPubMedService service = null;
 			Question qt = (Question) iter.next();
 			String text = qt.getText();
 			
-			text = QueryUtil.preprocess(text);
-		
+			//text = QueryUtil.preprocess(text);
+			//QueryUtil.POS(text);
 			/*
 			 * Disease Ontology
 			 */
@@ -62,11 +62,13 @@ private GoPubMedService service = null;
 				for (OntologyServiceResponse.Finding finding : diseaseOntologyResult.getFindings()) {
 			    	
 			    	if (finding == null || finding.getScore() < 0.1) break;
-			    	
+			    	System.out.println("Concpet:" + finding.getConcept().getLabel()+ " score: "+finding.getScore());
 			    	ConceptSearchResult conceptSearchResult = TypeFactory.createConceptSearchResult(aJCas,
 			    			TypeFactory.createConcept(aJCas, finding.getConcept().getLabel(), 
 			    					finding.getConcept().getUri()), finding.getConcept().getUri());
 			    	conceptSearchResult.setRank(rankOfConcept);
+			    	conceptSearchResult.setScore(finding.getScore());
+			    	conceptSearchResult.setServiceType("disease");
 			    	conceptSearchResult.addToIndexes();
 			    	rankOfConcept++;	        	
 			    }
@@ -74,7 +76,7 @@ private GoPubMedService service = null;
 		        e.printStackTrace();
 			}
 			
-			
+			//if (true) continue;
 			/*
 			 * Gene Ontology
 			 */
@@ -87,12 +89,14 @@ private GoPubMedService service = null;
 
 				for (OntologyServiceResponse.Finding finding : geneOntologyResult.getFindings()) {
 			    	
-			    	if (finding == null || finding.getScore() < 0.1) break;
-			    	
+			    	if (finding == null || finding.getScore() < 0.5) break;
+			    	System.out.println("Concpet:" + finding.getConcept().getLabel()+ " score: "+finding.getScore());
 			    	ConceptSearchResult conceptSearchResult = TypeFactory.createConceptSearchResult(aJCas,
 			    			TypeFactory.createConcept(aJCas, finding.getConcept().getLabel(), 
 			    					finding.getConcept().getUri()), finding.getConcept().getUri());
 			    	conceptSearchResult.setRank(rankOfConcept);
+			    	conceptSearchResult.setScore(finding.getScore());
+			    	conceptSearchResult.setServiceType("gene");
 			    	conceptSearchResult.addToIndexes();
 			    	rankOfConcept++;	        	
 			    }
@@ -114,11 +118,13 @@ private GoPubMedService service = null;
 				for (OntologyServiceResponse.Finding finding : jochemEntitiesResult.getFindings()) {
 			    	
 			    	if (finding == null || finding.getScore() < 0.1) break;
-			    	
+			    	System.out.println("Concpet:" + finding.getConcept().getLabel()+ " score: "+finding.getScore());
 			    	ConceptSearchResult conceptSearchResult = TypeFactory.createConceptSearchResult(aJCas,
 			    			TypeFactory.createConcept(aJCas, finding.getConcept().getLabel(), 
 			    					finding.getConcept().getUri()), finding.getConcept().getUri());
 			    	conceptSearchResult.setRank(rankOfConcept);
+			    	conceptSearchResult.setScore(finding.getScore());
+			    	conceptSearchResult.setServiceType("jochem");
 			    	conceptSearchResult.addToIndexes();
 			    	rankOfConcept++;	        	
 			    }
@@ -139,11 +145,13 @@ private GoPubMedService service = null;
 				for (OntologyServiceResponse.Finding finding : meshResult.getFindings()) {
 			    	
 			    	if (finding == null || finding.getScore() < 0.1) break;
-			    	
+			    	System.out.println("Concpet:" + finding.getConcept().getLabel()+ " score: "+finding.getScore());
 			    	ConceptSearchResult conceptSearchResult = TypeFactory.createConceptSearchResult(aJCas,
 			    			TypeFactory.createConcept(aJCas, finding.getConcept().getLabel(), 
 			    					finding.getConcept().getUri()), finding.getConcept().getUri());
 			    	conceptSearchResult.setRank(rankOfConcept);
+			    	conceptSearchResult.setScore(finding.getScore());
+			    	conceptSearchResult.setServiceType("mesh");
 			    	conceptSearchResult.addToIndexes();
 			    	rankOfConcept++;	        	
 			    }
@@ -169,6 +177,8 @@ private GoPubMedService service = null;
 			    			TypeFactory.createConcept(aJCas, finding.getConcept().getLabel(), 
 			    					finding.getConcept().getUri()), finding.getConcept().getUri());
 			    	conceptSearchResult.setRank(rankOfConcept);
+			    	conceptSearchResult.setScore(finding.getScore());
+			    	conceptSearchResult.setServiceType("uniprot");
 			    	conceptSearchResult.addToIndexes();
 			    	rankOfConcept++;	        	
 			    }

@@ -190,6 +190,11 @@
           <rangeTypeName>uima.cas.FSArray</rangeTypeName>
           <elementType>edu.cmu.lti.oaqa.type.answer.CandidateAnswerVariant</elementType>
         </featureDescription>
+      <featureDescription>
+          <name>serviceType</name>
+          <description>Descibe which engine the result get from</description>
+          <rangeTypeName>uima.cas.String</rangeTypeName>
+        </featureDescription>
       </features>
     </typeDescription>
     <typeDescription>

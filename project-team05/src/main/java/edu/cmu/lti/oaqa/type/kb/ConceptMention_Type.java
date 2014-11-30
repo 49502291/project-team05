@@ -14,7 +14,7 @@ import org.apache.uima.cas.Feature;
 import org.apache.uima.jcas.tcas.Annotation_Type;
 
 /** A superclass for EntityMention and RelationMention.
- * Updated by JCasGen Tue Nov 18 18:25:54 EST 2014
+ * Updated by JCasGen Sat Nov 29 21:34:24 EST 2014
  * @generated */
 public class ConceptMention_Type extends Annotation_Type {
   /** @generated 

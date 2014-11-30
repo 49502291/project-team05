@@ -3,11 +3,17 @@
   <frameworkImplementation>org.apache.uima.java</frameworkImplementation>
   <primitive>false</primitive>  
   <delegateAnalysisEngineSpecifiers>
-    <delegateAnalysisEngine key="aeDescriptor">
-      <import name="descriptors.aeDescriptor"/>
+    <delegateAnalysisEngine key="DocumentDescriptor">
+      <import location="DocumentDescriptor.xml"/>
     </delegateAnalysisEngine>
-    <delegateAnalysisEngine key="SnippetsDescriptor">
-      <import name="descriptors.SnippetsDescriptor"/>
+    <delegateAnalysisEngine key="ConceptDescriptor">
+      <import location="ConceptDescriptor.xml"/>
+    </delegateAnalysisEngine>
+  <delegateAnalysisEngine key="TripleDescriptor">
+      <import location="TripleDescriptor.xml"/>
+    </delegateAnalysisEngine>
+    <delegateAnalysisEngine key="SnippetDescriptor">
+      <import location="SnippetDescriptor.xml"/>
     </delegateAnalysisEngine>
   </delegateAnalysisEngineSpecifiers>
   <analysisEngineMetaData>
@@ -19,8 +25,7 @@
     <configurationParameterSettings/>
     <flowConstraints>
       <fixedFlow>
-        <node>aeDescriptor</node>
-        <node>SnippetsDescriptor</node>
+        <node>ConceptDescriptor</node>
       </fixedFlow>
     </flowConstraints>
     <fsIndexCollection/>

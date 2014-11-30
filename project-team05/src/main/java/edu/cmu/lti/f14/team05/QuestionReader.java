@@ -10,8 +10,7 @@ import org.apache.uima.resource.ResourceInitializationException;
 import org.apache.uima.util.Progress;
 import org.apache.uima.util.ProgressImpl;
 
-import java.io.File;
-import java.io.InputStream;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -19,7 +18,7 @@ import org.apache.uima.jcas.JCas;
 
 import com.google.common.collect.Lists;
 
-import edu.cmu.lti.oaqa.type.input.*;
+
 import json.gson.Question;
 import json.gson.QuestionType;
 import json.gson.TestQuestion;

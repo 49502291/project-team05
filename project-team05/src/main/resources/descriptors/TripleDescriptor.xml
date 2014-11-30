@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <analysisEngineDescription xmlns="http://uima.apache.org/resourceSpecifier">
   <frameworkImplementation>org.apache.uima.java</frameworkImplementation>
-  <primitive>true</primitive>  <annotatorImplementationName>edu.cmu.lti.f14.team05.BioAsqAnnotator</annotatorImplementationName>
+  <primitive>true</primitive>  <annotatorImplementationName>edu.cmu.lti.f14.team05.TripleAnnotator</annotatorImplementationName>
   <analysisEngineMetaData>
-    <name>aeDescriptor</name>
+    <name>TripleDescriptor</name>
     <description/>
     <version>1.0</version>
     <vendor/>
@@ -20,11 +20,11 @@
       <capability>
         <inputs>
           <type allAnnotatorFeatures="true">edu.cmu.lti.oaqa.type.input.Question</type>
+          <type allAnnotatorFeatures="true">edu.cmu.lti.oaqa.type.retrieval.ComplexQueryConcept</type>
+          <type allAnnotatorFeatures="true">edu.cmu.lti.oaqa.type.retrieval.AtomicQueryConcept</type>
         </inputs>
         <outputs>
           <type allAnnotatorFeatures="true">edu.cmu.lti.oaqa.type.kb.Triple</type>
-          <type allAnnotatorFeatures="true">edu.cmu.lti.oaqa.type.retrieval.Document</type>
-          <type allAnnotatorFeatures="true">edu.cmu.lti.oaqa.type.kb.Concept</type>
         </outputs>
         <languagesSupported/>
       </capability>

@@ -1,5 +1,6 @@
 *.class
 project-team05/.classpath
+project-team05/bin
 project-team05/report.txt
 **/.DS_Store
 report.txt

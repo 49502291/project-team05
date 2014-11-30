@@ -45,6 +45,7 @@ public class BioAsqAnnotator extends JCasAnnotator_ImplBase {
 	public void process(JCas aJCas) throws AnalysisEngineProcessException {
 		// TODO Auto-generated method stub
 		FSIterator<Annotation> iter = aJCas.getAnnotationIndex(Question.type).iterator();
+		
 		while(iter.hasNext())
 		{
 			Question qt = (Question) iter.next();

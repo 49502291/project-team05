@@ -42,7 +42,7 @@ public class BioConsumer extends CasConsumer_ImplBase {
 	public void initialize() throws ResourceInitializationException{
 		exactAnswer = new ArrayList<ExactAnswer>();
 		try {
-			fout = new FileWriter("report.txt");
+			fout = new FileWriter("ListAnswer.json");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -90,7 +90,7 @@ public class BioConsumer extends CasConsumer_ImplBase {
 				if (result != null) {
 					edu.cmu.lti.oaqa.type.kb.Triple t = result.getTriple();
 					if (t != null ) {
-						triples.add(result.getRank(),new Triple(t.getSubject(),t.getPredicate(),t.getObject()));
+						triples.add(new Triple(t.getSubject(),t.getPredicate(),t.getObject()));
 					}
 				}
 			}
@@ -101,7 +101,7 @@ public class BioConsumer extends CasConsumer_ImplBase {
 		ArrayList<Snippet> snippets = new ArrayList<Snippet>();
 		if(!snippetList.isEmpty()){
 			for (Passage snip : snippetList) {
-				snippets.add(snip.getRank(),new Snippet(snip.getUri(),snip.getText(),snip.getOffsetInBeginSection(),
+				snippets.add(new Snippet(snip.getUri(),snip.getText(),snip.getOffsetInBeginSection(),
 				snip.getOffsetInEndSection(),snip.getBeginSection(),snip.getEndSection()));
 			}
 		}

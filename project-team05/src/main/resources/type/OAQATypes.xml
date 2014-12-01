@@ -190,11 +190,6 @@
           <rangeTypeName>uima.cas.FSArray</rangeTypeName>
           <elementType>edu.cmu.lti.oaqa.type.answer.CandidateAnswerVariant</elementType>
         </featureDescription>
-      <featureDescription>
-          <name>serviceType</name>
-          <description>Descibe which engine the result get from</description>
-          <rangeTypeName>uima.cas.String</rangeTypeName>
-        </featureDescription>
       </features>
     </typeDescription>
     <typeDescription>
@@ -530,6 +525,11 @@
           <description>The relevant concept searched in the ontology.</description>
           <rangeTypeName>edu.cmu.lti.oaqa.type.kb.Concept</rangeTypeName>
           </featureDescription>
+      <featureDescription>
+          <name>serviceType</name>
+          <description/>
+          <rangeTypeName>uima.cas.String</rangeTypeName>
+        </featureDescription>
       </features>
     </typeDescription>
     <typeDescription>

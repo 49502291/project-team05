@@ -33,9 +33,9 @@ public class SnippetAnnotator extends JCasAnnotator_ImplBase {
 	public void process(JCas aJCas) throws AnalysisEngineProcessException {
 		// TODO Auto-generated method stub
     
-	FSIterator<TOP> it = aJCas.getJFSIndexRepository().getAllIndexedFS(Document.type);
+	    FSIterator<TOP> it = aJCas.getJFSIndexRepository().getAllIndexedFS(Document.type);
 		
-		while(it.hasNext())
+		while(it.hasNext())	
 		{
 			Document annotation =  (Document)it.next();
 			
@@ -63,7 +63,6 @@ public class SnippetAnnotator extends JCasAnnotator_ImplBase {
 	        
 	        
 	        String content = sb.toString();
-	       
 	        
 	        //Parse Json data
 	        Gson gson =new Gson();

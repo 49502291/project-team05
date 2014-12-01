@@ -13,8 +13,8 @@ import edu.cmu.lti.oaqa.type.answer.CandidateAnswerVariant;
 
 
 /** A search result.
- * Updated by JCasGen Sat Nov 29 21:34:24 EST 2014
- * XML source: /Users/seanhan/workspace/bioQA/project-team05/src/main/resources/type/OAQATypes.xml
+ * Updated by JCasGen Sun Nov 30 19:21:56 EST 2014
+ * XML source: /Users/Freddie/git/project-team05/project-team05/src/main/resources/type/OAQATypes.xml
  * @generated */
 public class SearchResult extends TOP {
   /** @generated
@@ -240,28 +240,6 @@ public class SearchResult extends TOP {
       jcasType.jcas.throwFeatMissing("candidateAnswers", "edu.cmu.lti.oaqa.type.retrieval.SearchResult");
     jcasType.jcas.checkArrayBounds(jcasType.ll_cas.ll_getRefValue(addr, ((SearchResult_Type)jcasType).casFeatCode_candidateAnswers), i);
     jcasType.ll_cas.ll_setRefArrayValue(jcasType.ll_cas.ll_getRefValue(addr, ((SearchResult_Type)jcasType).casFeatCode_candidateAnswers), i, jcasType.ll_cas.ll_getFSRef(v));}
-   
-    
-  //*--------------*
-  //* Feature: serviceType
-
-  /** getter for serviceType - gets Descibe which engine the result get from
-   * @generated
-   * @return value of the feature 
-   */
-  public String getServiceType() {
-    if (SearchResult_Type.featOkTst && ((SearchResult_Type)jcasType).casFeat_serviceType == null)
-      jcasType.jcas.throwFeatMissing("serviceType", "edu.cmu.lti.oaqa.type.retrieval.SearchResult");
-    return jcasType.ll_cas.ll_getStringValue(addr, ((SearchResult_Type)jcasType).casFeatCode_serviceType);}
-    
-  /** setter for serviceType - sets Descibe which engine the result get from 
-   * @generated
-   * @param v value to set into the feature 
-   */
-  public void setServiceType(String v) {
-    if (SearchResult_Type.featOkTst && ((SearchResult_Type)jcasType).casFeat_serviceType == null)
-      jcasType.jcas.throwFeatMissing("serviceType", "edu.cmu.lti.oaqa.type.retrieval.SearchResult");
-    jcasType.ll_cas.ll_setStringValue(addr, ((SearchResult_Type)jcasType).casFeatCode_serviceType, v);}    
   }
 
     

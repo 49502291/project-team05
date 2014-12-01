@@ -73,7 +73,7 @@ public class QueryUtil {
 				if (!stemStr.equals(textList[i])) {
 					newStr.append("(" + stemStr + " OR " + textList[i] + ")  ");
 				} else {
-					newStr.append(textList[i] + "  ");
+					newStr.append(textList[i] + " ");
 				}
 			}
 		}
@@ -137,10 +137,29 @@ public class QueryUtil {
 		List<String> tokenList = Arrays.asList(tokens);
 		Tagging<String> tagging = decoder.tag(tokenList);
 		StringBuilder result = new StringBuilder();
-		
+		StringBuilder concept = new StringBuilder();
+		boolean first = true;
 		for (int i = 0; i < tagging.size(); ++i) {
-			if (tagging.tag(i).indexOf(type) > -1)
-				result.append(tagging.token(i) + " ");
+			if (tagging.tag(i).indexOf(type) > -1) {
+				concept.append(tagging.token(i) + " ");
+				if (i < tagging.size()-1) {
+					if (tagging.tag(i+1).indexOf(type) == -1) {
+						String newConcept = ConceptAnnotator.identifySingleConcept(concept.toString());
+						System.out.println("NEW:" + newConcept + " OLD:" + concept.toString());
+						if (!first) {
+							result.append("|");
+						} else {
+							first = false;
+						}
+						result.append("\"" + newConcept + "\"");
+						concept = new StringBuilder();
+					}
+				} else {
+					String newConcept = ConceptAnnotator.identifySingleConcept(concept.toString());
+					System.out.println("NEW:" + newConcept + " OLD:" + concept.toString());
+					result.append("|\"" + newConcept + "\"");
+				}
+			}
 		}
 		return result.toString();
 	}

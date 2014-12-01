@@ -1,10 +1,13 @@
 package edu.cmu.lti.f14.team05;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.List;
 
 import org.apache.commons.configuration.ConfigurationException;
+import org.apache.http.client.ClientProtocolException;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_component.JCasAnnotator_ImplBase;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
@@ -25,7 +28,7 @@ import edu.cmu.lti.oaqa.type.retrieval.ConceptSearchResult;
 
 public class ConceptAnnotator extends JCasAnnotator_ImplBase {
 
-private GoPubMedService service = null;
+	private static GoPubMedService service = null;
 	
 	@Override
 	public void initialize(UimaContext aContext) throws ResourceInitializationException {
@@ -36,6 +39,42 @@ private GoPubMedService service = null;
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	public static String identifySingleConcept(String text) {
+		double maxScore = 0;
+		text = text.toLowerCase().trim().replaceAll("^a-z0-9", "");
+		String concept = text;
+		List<OntologyServiceResponse.Result> results = new ArrayList<OntologyServiceResponse.Result>();
+		System.out.println("Finding:" + text);
+		try {
+			System.out.println("Disease");
+			results.add(service.findDiseaseOntologyEntitiesPaged(text, 0, 1));
+			System.out.println("Gene");
+			results.add(service.findGeneOntologyEntitiesPaged(text, 0, 1));
+			System.out.println("Jochem");
+			results.add(service.findJochemEntitiesPaged(text, 0, 1));
+			System.out.println("Mesh");
+			results.add(service.findMeshEntitiesPaged(text, 0, 1));
+			System.out.println("Uniprot");
+			results.add(service.findUniprotEntitiesPaged(text, 0, 1));
+		} catch (ClientProtocolException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		for (OntologyServiceResponse.Result result : results) {
+			if (result.getFindings().size() > 0 && maxScore < result.getFindings().get(0).getScore()) {
+				OntologyServiceResponse.Finding finding = result.getFindings().get(0);
+				if (maxScore < finding.getScore()) {
+					maxScore = finding.getScore();
+					concept = finding.getConcept().getLabel();
+				}
+			}
+		}
+		
+		return concept.toLowerCase().trim();
 	}
 	
 	@Override

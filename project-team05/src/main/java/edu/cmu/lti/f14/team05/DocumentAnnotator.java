@@ -55,10 +55,8 @@ public class DocumentAnnotator extends JCasAnnotator_ImplBase {
 			text = QueryUtil.preprocess(text);
 			// text = QueryUtil.POS(text);
 			// String query = buildQuery(text);
-
-			text = text.replaceAll("  ", " AND ");
+			text = text.replaceAll("\\|", " AND ");
 			System.out.println(qt.getText());
-			
 			int resultLength = 0;
 			try {
 				PubMedSearchServiceResponse.Result pubmedResult = null;
@@ -71,22 +69,22 @@ public class DocumentAnnotator extends JCasAnnotator_ImplBase {
 						String [] parts = text.split(" AND ");
 						StringBuilder newStr = new StringBuilder();
 						for (int i=1;i<parts.length;i++){
-							newStr.append(parts[i] + "  ");
+							newStr.append(parts[i]);
+							if (i < parts.length -1) {
+								newStr.append("|");
+							}
 						}
-						text = newStr.toString().trim().replaceAll("  ", " AND ").trim();
+						text = newStr.toString().trim().replaceAll("\\|", " AND ").trim();
 					}
 				}
 
 				int rankOfDocument = 1;
 				for (Document doc : pubmedResult.getDocuments()) {
 					String pmid = doc.getPmid();
-					System.out.println(doc.getDocumentAbstract());
 					String uri = "http://www.ncbi.nlm.nih.gov/pubmed/" + pmid;
 					edu.cmu.lti.oaqa.type.retrieval.Document document = TypeFactory
 							.createDocument(aJCas, uri, "xxxx", rankOfDocument,
 									"cccc", doc.getPmid(), doc.getPmid());
-					// System.out.println(uri);
-					document.setAbstract(doc.getDocumentAbstract());
 					rankOfDocument++;
 					document.addToIndexes();
 				}

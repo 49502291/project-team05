@@ -2,8 +2,12 @@ package edu.cmu.lti.f14.team05;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_component.JCasAnnotator_ImplBase;
@@ -29,7 +33,6 @@ import edu.cmu.lti.oaqa.type.retrieval.Passage;
 
 
 public class ExactAnswerAnnotator extends JCasAnnotator_ImplBase {
-
 	
 	
 	private static ConfidenceChunker chunker = null;
@@ -77,83 +80,134 @@ public class ExactAnswerAnnotator extends JCasAnnotator_ImplBase {
 		
 		
 		FSIterator<TOP> itConcept = aJCas.getJFSIndexRepository().getAllIndexedFS(ConceptSearchResult.type);
-		Double maxScore = 0.0; 
-		String conceptLabel = null;
+		int conceptLabelCounter = 0; 
+		String conceptLabel = new String();
+
 		
 		// Get concept label with max Score retrieved from Mesh service
 		while(itConcept.hasNext())
 		{
 			ConceptSearchResult concept = (ConceptSearchResult) itConcept.next();
 			
-			if(concept.getServiceType() == "mesh")
+			if(concept.getServiceType() == "mesh" && conceptLabelCounter < 2)
 			{
-				if(concept.getScore() > maxScore)
-				{
-					maxScore = concept.getScore();
-					conceptLabel = concept.getConcept().getName();
-				}
+;
+			   conceptLabel += concept.getConcept().getName();
+			   conceptLabel += " ";
+			   conceptLabelCounter++;
+			}
+			
+			if(conceptLabelCounter == 2)
+				break;
+			
+		}
+		
+		//Get exact answer
+		
+		double threshold = 0.1;
+		Chunking chunking =null;
+		int AnswerRetrievalNum = 0;		
+		FSIterator<TOP> itPassage = aJCas.getJFSIndexRepository().getAllIndexedFS(Passage.type);
+
+		
+		if(conceptLabel != null)
+		{
+			conceptLabel = preprocess(conceptLabel);
+			
+			List<String> conceptList = tokenize0(conceptLabel);
+			Set<String> conceptSet = List2Set(conceptList);
+			
+			int SetSize = conceptSet.size();		
+			
+			while(itPassage.hasNext() && AnswerRetrievalNum < MaxRetrivalNum)
+			{
+			   Passage snippet = (Passage) itPassage.next();
+			   String temp = snippet.getText();
+			   String text = temp;
+			   temp = preprocess(temp);
+			   
+			   int count = 0;
+			   
+			   for(String token : conceptSet)
+			   {
+				   if(temp.indexOf(token) != -1)
+				   {
+					   count ++ ;
+				   }
+				   
+			   }
+			   
+	//		   System.out.println( (double)count/(double)SetSize);
+			   
+			   if ((double)count/(double)SetSize > threshold)
+			   {
+				   char cs[] =text.toCharArray();
+										
+	               Iterator<Chunk> chunkit = chunker.nBestChunks(cs, 0, cs.length, 10);
+
+						
+				    while(chunkit.hasNext()){
+							
+					Chunk chunk = chunkit.next();   
+					double conf = Math.pow(2.0, chunk.score());
+
+					if(conf > 0.6)
+					{
+						String answer = text.substring(chunk.start(), chunk.end());
+						
+						if(questionText.indexOf(answer) == -1){
+						Answer exactAnswer = TypeFactory.createAnswer(aJCas, answer);
+						exactAnswer.addToIndexes();
+						
+						AnswerRetrievalNum ++;
+						}
+					}
+					
+				   }
+				   
+			   }
+			   	
+			}
+		}
+		
+		else
+		{
+			while(itPassage.hasNext() && AnswerRetrievalNum < MaxRetrivalNum)
+			{
+			   Passage snippet = (Passage) itPassage.next();
+			   String text = snippet.getText();
+		
+				   char cs[] =text.toCharArray();
+										
+	               Iterator<Chunk> chunkit = chunker.nBestChunks(cs, 0, cs.length, 10);
+
+						
+				    while(chunkit.hasNext()){
+							
+					Chunk chunk = chunkit.next();   
+					double conf = Math.pow(2.0, chunk.score());
+
+					if(conf > 0.6)
+					{
+						String answer = text.substring(chunk.start(), chunk.end());
+						
+						if(questionText.indexOf(answer) == -1){
+						Answer exactAnswer = TypeFactory.createAnswer(aJCas, answer);
+						exactAnswer.addToIndexes();
+						
+						AnswerRetrievalNum ++;
+						}
+					}
+					
+				   }
+				   
+			   
+			   	
 			}
 			
 		}
 		
-		if(conceptLabel == null)
-		{
-			System.out.println("concept Label is null");
-			return;
-		}
 		
-		List<String> conceptToken = tokenize0(conceptLabel);
-		int listSize = conceptToken.size();		
-		double threshold = 0.6;
-		Chunking chunking =null;
-		int AnswerRetrievalNum = 0;
-		
-		FSIterator<TOP> itPassage = aJCas.getJFSIndexRepository().getAllIndexedFS(Passage.type);
-		
-		while(itPassage.hasNext() && AnswerRetrievalNum < MaxRetrivalNum)
-		{
-		   Passage snippet = (Passage) itPassage.next();
-		   String text = snippet.getText();
-		   int count = 0;
-		   
-		   for(String token : conceptToken)
-		   {
-			   if(text.indexOf(token) != -1)
-			   {
-				   count ++ ;
-			   }
-			   
-		   }
-		   
-		   if (count/listSize > threshold)
-		   {
-			   char cs[] =text.toCharArray();
-									
-               Iterator<Chunk> chunkit = chunker.nBestChunks(cs, 0, cs.length, 10);
-
-					
-			    while(chunkit.hasNext()){
-						
-				Chunk chunk = chunkit.next();   
-				double conf = Math.pow(2.0, chunk.score());
-
-				if(conf > 0.6)
-				{
-					String answer = text.substring(chunk.start(), chunk.end());
-					
-					if(questionText.indexOf(answer) == -1){
-					Answer exactAnswer = TypeFactory.createAnswer(aJCas, answer);
-					exactAnswer.addToIndexes();
-					
-					AnswerRetrievalNum ++;
-					}
-				}
-				
-			   }
-			   
-		   }
-		   	
-		}
 		
 	}
 	
@@ -173,7 +227,41 @@ public class ExactAnswerAnnotator extends JCasAnnotator_ImplBase {
 		  return res;
 		}
 
+	/**
+	 *   List  to  HashSet
+	 *  	
+	 */
+	
+	 Set<String> List2Set(List<String> list) {
+		
+		 Set<String> result = new HashSet<String>();
+		 
+		 for(String s : list)
+		 {
+			result.add(s); 
+		 }
+		 
+		 return result;
 
+		 
+	 }
+
+	 
+		public static String preprocess(String oText) {
+			
+			// 1. only use alphabets
+			oText = oText.replaceAll("[^a-zA-Z0-9]+", " ");
+
+			// 2. to lower case
+			oText = oText.toLowerCase();
+			
+			//3. Stemming
+			oText = StanfordLemmatizer.stemText(oText);
+			
+			return oText;
+		}
+		
+		
 }
 
 

@@ -82,7 +82,7 @@ public class DocumentAnnotator extends JCasAnnotator_ImplBase {
 				int rankOfDocument = 1;
 				for (Document doc : pubmedResult.getDocuments()) {
 					String pmid = doc.getPmid();
-					System.out.println(doc.getDocumentAbstract());
+				//	System.out.println(doc.getDocumentAbstract());
 					String uri = "http://www.ncbi.nlm.nih.gov/pubmed/" + pmid;
 					edu.cmu.lti.oaqa.type.retrieval.Document document = TypeFactory
 							.createDocument(aJCas, uri, "xxxx", rankOfDocument,

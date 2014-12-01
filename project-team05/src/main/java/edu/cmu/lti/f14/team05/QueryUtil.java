@@ -34,7 +34,7 @@ public class QueryUtil {
 	private static final int MAX_N_BEST_CHUNKS = 5;
 	private static List<String> stopWordList = null;
 
-	private static void readStopWords() {
+	public static List<String> readStopWords() {
 		File stopWordFile = new File("src/main/resources/stopwords.txt");
 		try {
 			stopWordList = new ArrayList<String>(Arrays.asList(FileUtils
@@ -43,6 +43,7 @@ public class QueryUtil {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		return stopWordList;
 	}
 
 	public static String preprocess(String oText) {

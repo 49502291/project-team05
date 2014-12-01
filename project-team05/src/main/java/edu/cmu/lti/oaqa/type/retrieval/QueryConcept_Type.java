@@ -14,7 +14,7 @@ import org.apache.uima.cas.Feature;
 import org.apache.uima.jcas.cas.TOP_Type;
 
 /** A query concept in the abstract search query model.
- * Updated by JCasGen Sat Nov 29 21:34:24 EST 2014
+ * Updated by JCasGen Sun Nov 30 20:49:33 EST 2014
  * @generated */
 public class QueryConcept_Type extends TOP_Type {
   /** @generated 

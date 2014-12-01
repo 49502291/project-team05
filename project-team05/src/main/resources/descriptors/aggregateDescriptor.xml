@@ -15,17 +15,24 @@
     <delegateAnalysisEngine key="SnippetDescriptor">
       <import location="SnippetDescriptor.xml"/>
     </delegateAnalysisEngine>
+  <delegateAnalysisEngine key="ExactAnswerDescriptor">
+      <import name="descriptors.ExactAnswerDescriptor"/>
+    </delegateAnalysisEngine>
   </delegateAnalysisEngineSpecifiers>
   <analysisEngineMetaData>
     <name>aggregateDescriptor</name>
     <description/>
     <version>1.0</version>
     <vendor/>
-    <configurationParameters/>
+    <configurationParameters searchStrategy="language_fallback"/>
     <configurationParameterSettings/>
     <flowConstraints>
       <fixedFlow>
         <node>ConceptDescriptor</node>
+      <node>TripleDescriptor</node>
+        <node>DocumentDescriptor</node>
+        <node>SnippetDescriptor</node>
+        <node>ExactAnswerDescriptor</node>
       </fixedFlow>
     </flowConstraints>
     <fsIndexCollection/>

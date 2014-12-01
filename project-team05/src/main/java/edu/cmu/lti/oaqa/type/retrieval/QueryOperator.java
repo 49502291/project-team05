@@ -12,8 +12,8 @@ import org.apache.uima.jcas.cas.TOP;
 
 
 /** A query operator in the abstract search query model.
- * Updated by JCasGen Sat Nov 29 21:34:24 EST 2014
- * XML source: /Users/seanhan/workspace/bioQA/project-team05/src/main/resources/type/OAQATypes.xml
+ * Updated by JCasGen Sun Nov 30 03:03:33 EST 2014
+ * XML source: /Users/seven/git/project-team05/project-team05/src/main/resources/type/OAQATypes.xml
  * @generated */
 public class QueryOperator extends TOP {
   /** @generated

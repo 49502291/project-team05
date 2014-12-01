@@ -10,8 +10,8 @@ import org.apache.uima.jcas.cas.TOP_Type;
 
 
 /** A search result where the candidate answer is obtained as part of the search process and saved in the text field of the search result.
- * Updated by JCasGen Sat Nov 29 21:34:24 EST 2014
- * XML source: /Users/seanhan/workspace/bioQA/project-team05/src/main/resources/type/OAQATypes.xml
+ * Updated by JCasGen Sun Nov 30 03:03:33 EST 2014
+ * XML source: /Users/seven/git/project-team05/project-team05/src/main/resources/type/OAQATypes.xml
  * @generated */
 public class AnswerSearchResult extends SearchResult {
   /** @generated
@@ -61,6 +61,28 @@ public class AnswerSearchResult extends SearchResult {
    */
   private void readObject() {/*default - does nothing empty block */}
      
-}
+  //*--------------*
+  //* Feature: answer
+
+  /** getter for answer - gets Exact answer
+
+   * @generated
+   * @return value of the feature 
+   */
+  public String getAnswer() {
+    if (AnswerSearchResult_Type.featOkTst && ((AnswerSearchResult_Type)jcasType).casFeat_answer == null)
+      jcasType.jcas.throwFeatMissing("answer", "edu.cmu.lti.oaqa.type.retrieval.AnswerSearchResult");
+    return jcasType.ll_cas.ll_getStringValue(addr, ((AnswerSearchResult_Type)jcasType).casFeatCode_answer);}
+    
+  /** setter for answer - sets Exact answer
+ 
+   * @generated
+   * @param v value to set into the feature 
+   */
+  public void setAnswer(String v) {
+    if (AnswerSearchResult_Type.featOkTst && ((AnswerSearchResult_Type)jcasType).casFeat_answer == null)
+      jcasType.jcas.throwFeatMissing("answer", "edu.cmu.lti.oaqa.type.retrieval.AnswerSearchResult");
+    jcasType.ll_cas.ll_setStringValue(addr, ((AnswerSearchResult_Type)jcasType).casFeatCode_answer, v);}    
+  }
 
     

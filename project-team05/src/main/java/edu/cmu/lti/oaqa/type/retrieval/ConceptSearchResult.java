@@ -11,8 +11,8 @@ import edu.cmu.lti.oaqa.type.kb.Concept;
 
 
 /** A search result from an ontology.
- * Updated by JCasGen Sat Nov 29 21:34:24 EST 2014
- * XML source: /Users/seanhan/workspace/bioQA/project-team05/src/main/resources/type/OAQATypes.xml
+ * Updated by JCasGen Sun Nov 30 03:03:33 EST 2014
+ * XML source: /Users/seven/git/project-team05/project-team05/src/main/resources/type/OAQATypes.xml
  * @generated */
 public class ConceptSearchResult extends AnswerSearchResult {
   /** @generated

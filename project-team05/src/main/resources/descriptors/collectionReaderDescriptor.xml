@@ -20,7 +20,7 @@
       <nameValuePair>
         <name>inputFile</name>
         <value>
-          <string>oneQuestion.json</string>
+          <string>/oneQuestion.json</string>
         </value>
       </nameValuePair>
     </configurationParameterSettings>

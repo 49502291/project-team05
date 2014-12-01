@@ -14,7 +14,7 @@ import org.apache.uima.cas.Feature;
 import org.apache.uima.jcas.cas.TOP_Type;
 
 /** A search result.
- * Updated by JCasGen Sat Nov 29 21:34:24 EST 2014
+ * Updated by JCasGen Sun Nov 30 03:03:33 EST 2014
  * @generated */
 public class SearchResult_Type extends TOP_Type {
   /** @generated 
@@ -242,26 +242,26 @@ public class SearchResult_Type extends TOP_Type {
  
  
   /** @generated */
-  final Feature casFeat_serviceType;
+  final Feature casFeat_ServiceType;
   /** @generated */
-  final int     casFeatCode_serviceType;
+  final int     casFeatCode_ServiceType;
   /** @generated
    * @param addr low level Feature Structure reference
    * @return the feature value 
    */ 
   public String getServiceType(int addr) {
-        if (featOkTst && casFeat_serviceType == null)
-      jcas.throwFeatMissing("serviceType", "edu.cmu.lti.oaqa.type.retrieval.SearchResult");
-    return ll_cas.ll_getStringValue(addr, casFeatCode_serviceType);
+        if (featOkTst && casFeat_ServiceType == null)
+      jcas.throwFeatMissing("ServiceType", "edu.cmu.lti.oaqa.type.retrieval.SearchResult");
+    return ll_cas.ll_getStringValue(addr, casFeatCode_ServiceType);
   }
   /** @generated
    * @param addr low level Feature Structure reference
    * @param v value to set 
    */    
   public void setServiceType(int addr, String v) {
-        if (featOkTst && casFeat_serviceType == null)
-      jcas.throwFeatMissing("serviceType", "edu.cmu.lti.oaqa.type.retrieval.SearchResult");
-    ll_cas.ll_setStringValue(addr, casFeatCode_serviceType, v);}
+        if (featOkTst && casFeat_ServiceType == null)
+      jcas.throwFeatMissing("ServiceType", "edu.cmu.lti.oaqa.type.retrieval.SearchResult");
+    ll_cas.ll_setStringValue(addr, casFeatCode_ServiceType, v);}
     
   
 
@@ -305,8 +305,8 @@ public class SearchResult_Type extends TOP_Type {
     casFeatCode_candidateAnswers  = (null == casFeat_candidateAnswers) ? JCas.INVALID_FEATURE_CODE : ((FeatureImpl)casFeat_candidateAnswers).getCode();
 
  
-    casFeat_serviceType = jcas.getRequiredFeatureDE(casType, "serviceType", "uima.cas.String", featOkTst);
-    casFeatCode_serviceType  = (null == casFeat_serviceType) ? JCas.INVALID_FEATURE_CODE : ((FeatureImpl)casFeat_serviceType).getCode();
+    casFeat_ServiceType = jcas.getRequiredFeatureDE(casType, "ServiceType", "uima.cas.String", featOkTst);
+    casFeatCode_ServiceType  = (null == casFeat_ServiceType) ? JCas.INVALID_FEATURE_CODE : ((FeatureImpl)casFeat_ServiceType).getCode();
 
   }
 }

@@ -27,13 +27,12 @@ import com.aliasi.tokenizer.TokenizerFactory;
 import com.aliasi.util.AbstractExternalizable;
 import com.aliasi.util.Streams;
 
+import edu.cmu.lti.oaqa.bio.bioasq.services.GoPubMedService;
+
 public class QueryUtil {
 	private static final String POSModelPath = "src/main/resources/models/pos-en-bio-genia.HiddenMarkovModel";
 	private static final int MAX_N_BEST_CHUNKS = 5;
 	private static List<String> stopWordList = null;
-
-	public QueryUtil() {
-	}
 
 	private static void readStopWords() {
 		File stopWordFile = new File("src/main/resources/stopwords.txt");
@@ -56,17 +55,26 @@ public class QueryUtil {
 
 		// 2. to lower case
 		oText = oText.toLowerCase();
+		
+		// 3. Only noun
+		oText = POS(oText, "NN");
+		
+		// 4. stemming
+		
+		//oText = StanfordLemmatizer.stemText(oText);
 
-		// 3. stemming
-		oText = StanfordLemmatizer.stemText(oText);
-
-		// 4. remove stop words
+		// 5. remove stop words
 		String[] textList = oText.split("\\s+");
 		StringBuilder newStr = new StringBuilder();
 		for (int i = 0; i < textList.length; i++) {
-			textList[i] = StanfordLemmatizer.stemWord(textList[i]);
+			//textList[i] = StanfordLemmatizer.stemWord(textList[i]);
 			if (!stopWordList.contains(textList[i])) {
-				newStr.append(textList[i] + " ");
+				String stemStr = StanfordLemmatizer.stemWord(textList[i]);
+				if (!stemStr.equals(textList[i])) {
+					newStr.append("(" + stemStr + " OR " + textList[i] + ")  ");
+				} else {
+					newStr.append(textList[i] + "  ");
+				}
 			}
 		}
 		oText = newStr.toString().trim();
@@ -95,7 +103,7 @@ public class QueryUtil {
 		System.out.println("Chunking=" + chunking);
 	}
 
-	public static String POS(String oText) {
+	public static String POS(String oText, String type) {
 
 		FileInputStream fileIn = null;
 		try {
@@ -131,7 +139,8 @@ public class QueryUtil {
 		StringBuilder result = new StringBuilder();
 		
 		for (int i = 0; i < tagging.size(); ++i) {
-			result.append(tagging.token(i) + "_" + tagging.tag(i) + " ");
+			if (tagging.tag(i).indexOf(type) > -1)
+				result.append(tagging.token(i) + " ");
 		}
 		return result.toString();
 	}

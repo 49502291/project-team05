@@ -37,6 +37,7 @@ public class BioConsumer extends CasConsumer_ImplBase {
 	List<TestQuestion> goldStandards;
 	JsonCollectionReaderHelper jsonHelper;
 	List<Double> docPrecisionList;
+	List<Double> conceptPrecisionList;
 	
 	
 	@Override
@@ -59,6 +60,7 @@ public class BioConsumer extends CasConsumer_ImplBase {
 		}
 		
 		docPrecisionList = new ArrayList<Double>();
+		conceptPrecisionList = new ArrayList<Double>();
 	}
 	@Override
 	public void processCas(CAS aCAS) throws ResourceProcessException {
@@ -100,9 +102,16 @@ public class BioConsumer extends CasConsumer_ImplBase {
 			documentList.addAll(docCollection);
 			if (!documentList.isEmpty()){
 				for (Document doc: documentList){
-					fout.write(doc.getUri() + "\n");
-					if(docResult.contains(doc.getUri()))
+					
+					
+					if(docResult.contains(doc.getUri())) {
 						tpOfDocument++;
+						fout.write("HIT:");
+					} else {
+						fout.write("    ");
+					}
+						
+					fout.write(doc.getUri() + "\n");
 				}
 			}
 			precisionOfDocument = (tpOfDocument * 1.0) / documentList.size() * 1.0;
@@ -131,9 +140,13 @@ public class BioConsumer extends CasConsumer_ImplBase {
 			conceptList.addAll(conceptCollection);
 			if (!conceptList.isEmpty()){
 				for (ConceptSearchResult concept: conceptList){
-					fout.write(concept.getUri() + "\n");
-					if(conceptResult.contains(concept.getUri()))
+					if(conceptResult.contains(concept.getUri())) {
 						tpOfConcept++;
+						fout.write("HIT:");
+					} else {
+						fout.write("    ");
+					}
+					fout.write(concept.getUri() + " " + concept.getScore() +  "\n");
 				}
 			}
 			precisionOfConcept = (tpOfConcept * 1.0) / conceptList.size() * 1.0;
@@ -143,7 +156,7 @@ public class BioConsumer extends CasConsumer_ImplBase {
 			else
 				FScoreOfConcept = 2.0 * precisionOfConcept * recallOfConcept 
 				/ (precisionOfConcept + recallOfConcept);
-	
+			conceptPrecisionList.add(precisionOfConcept);
 			fout.write("\n");
 			fout.write("Precision of concept is:\n");
 			fout.write( precisionOfConcept + "\n");
@@ -152,50 +165,50 @@ public class BioConsumer extends CasConsumer_ImplBase {
 			fout.write("F score of concept is:\n");
 			fout.write( FScoreOfConcept + "\n");
 			
-			fout.write("Triples:\n");
-			List<Triple> tripleResult = goldTriples.get(queryId);
-			System.out.println("***************");
-			System.out.println(queryId);
-			Collection<TripleSearchResult> tripleCollection = TypeUtil.getRankedTripleSearchResults(jcas);
-			LinkedList<TripleSearchResult> tripleList = new LinkedList<TripleSearchResult>();
-			tripleList.addAll(tripleCollection);
-			
-			for (TripleSearchResult result: tripleCollection) {
-				if (result != null) {
-					edu.cmu.lti.oaqa.type.kb.Triple t = result.getTriple();
-					if (t != null /*&& t.getSubject()!= null && t.getObject()!= null && t.getPredicate()!= null*/) {
-						fout.write("Subject:" + t.getSubject() + "\n");
-						fout.write("Object:" + t.getObject() + "\n");
-						fout.write("Predicate:" + t.getPredicate() + "\n");
-						for (int i=0;i<tripleResult.size();i++) {
-							if (t.getSubject() == tripleResult.get(i).getS()) {
-								tpOfTriple++;
-							}
-						}
-					}
-				}
-			}
-			precisionOfTriple = (tpOfTriple * 1.0) / tripleList.size() * 1.0;
-			recallOfTriple = (tpOfTriple * 1.0) / tripleResult.size() * 1.0;
-			if (precisionOfTriple == 0 && recallOfTriple == 0)
-				FScoreOfTriple = 0.0;
-			else
-				FScoreOfTriple = 2.0 * precisionOfTriple * recallOfTriple 
-				/ (precisionOfTriple + recallOfTriple);
-			fout.write("\n");
-			fout.write("Precision of triple is:\n");
-			fout.write( precisionOfTriple + "\n");
-			fout.write("Recall of triple is:\n");
-			fout.write( recallOfTriple + "\n");
-			fout.write("F score of triple is:\n");
-			fout.write( FScoreOfTriple + "\n");
-			
-			
-			fout.write("Passages:\n");
-			Collection<Passage> passageCollection = TypeUtil.getRankedPassages(jcas);
-			for (Passage passage : passageCollection) {
-				fout.write(passage.getText() + "\n");
-			}
+//			fout.write("Triples:\n");
+//			List<Triple> tripleResult = goldTriples.get(queryId);
+//			System.out.println("***************");
+//			System.out.println(queryId);
+//			Collection<TripleSearchResult> tripleCollection = TypeUtil.getRankedTripleSearchResults(jcas);
+//			LinkedList<TripleSearchResult> tripleList = new LinkedList<TripleSearchResult>();
+//			tripleList.addAll(tripleCollection);
+//			
+//			for (TripleSearchResult result: tripleCollection) {
+//				if (result != null) {
+//					edu.cmu.lti.oaqa.type.kb.Triple t = result.getTriple();
+//					if (t != null /*&& t.getSubject()!= null && t.getObject()!= null && t.getPredicate()!= null*/) {
+//						fout.write("Subject:" + t.getSubject() + "\n");
+//						fout.write("Object:" + t.getObject() + "\n");
+//						fout.write("Predicate:" + t.getPredicate() + "\n");
+//						for (int i=0;i<tripleResult.size();i++) {
+//							if (t.getSubject() == tripleResult.get(i).getS()) {
+//								tpOfTriple++;
+//							}
+//						}
+//					}
+//				}
+//			}
+//			precisionOfTriple = (tpOfTriple * 1.0) / tripleList.size() * 1.0;
+//			recallOfTriple = (tpOfTriple * 1.0) / tripleResult.size() * 1.0;
+//			if (precisionOfTriple == 0 && recallOfTriple == 0)
+//				FScoreOfTriple = 0.0;
+//			else
+//				FScoreOfTriple = 2.0 * precisionOfTriple * recallOfTriple 
+//				/ (precisionOfTriple + recallOfTriple);
+//			fout.write("\n");
+//			fout.write("Precision of triple is:\n");
+//			fout.write( precisionOfTriple + "\n");
+//			fout.write("Recall of triple is:\n");
+//			fout.write( recallOfTriple + "\n");
+//			fout.write("F score of triple is:\n");
+//			fout.write( FScoreOfTriple + "\n");
+//			
+//			
+//			fout.write("Passages:\n");
+//			Collection<Passage> passageCollection = TypeUtil.getRankedPassages(jcas);
+//			for (Passage passage : passageCollection) {
+//				fout.write(passage.getText() + "\n");
+//			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -206,6 +219,7 @@ public class BioConsumer extends CasConsumer_ImplBase {
 	public void collectionProcessComplete(ProcessTrace arg0) throws ResourceProcessException,
     IOException {
 		fout.write("Precision List of Documents:"  + docPrecisionList.toString() + "\n");
+		fout.write("Precision List of Concepts:"  + conceptPrecisionList.toString() + "\n");
 		fout.close();
 	}
 

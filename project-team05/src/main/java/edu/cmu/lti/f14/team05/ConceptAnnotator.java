@@ -67,13 +67,13 @@ public class ConceptAnnotator extends JCasAnnotator_ImplBase {
 		for (OntologyServiceResponse.Result result : results) {
 			if (result.getFindings().size() > 0 && maxScore < result.getFindings().get(0).getScore()) {
 				OntologyServiceResponse.Finding finding = result.getFindings().get(0);
-				if (maxScore < finding.getScore()) {
+				if (maxScore < finding.getScore() && finding.getScore() > 0.8) {
 					maxScore = finding.getScore();
 					concept = finding.getConcept().getLabel();
 				}
 			}
 		}
-		
+		System.out.println("SCORE:" + maxScore);
 		return concept.toLowerCase().trim();
 	}
 	

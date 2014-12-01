@@ -59,6 +59,7 @@ public class DocumentAnnotator extends JCasAnnotator_ImplBase {
 			System.out.println(qt.getText());
 			int resultLength = 0;
 			try {
+
 				PubMedSearchServiceResponse.Result pubmedResult = null;
 				while (resultLength == 0 && !text.isEmpty()) {
 					System.out.println(text);
@@ -76,6 +77,7 @@ public class DocumentAnnotator extends JCasAnnotator_ImplBase {
 						}
 						text = newStr.toString().trim().replaceAll("\\|", " AND ").trim();
 					}
+
 				}
 
 				int rankOfDocument = 1;
@@ -84,7 +86,9 @@ public class DocumentAnnotator extends JCasAnnotator_ImplBase {
 					String uri = "http://www.ncbi.nlm.nih.gov/pubmed/" + pmid;
 					edu.cmu.lti.oaqa.type.retrieval.Document document = TypeFactory
 							.createDocument(aJCas, uri, "xxxx", rankOfDocument,
-									"cccc", doc.getPmid(), doc.getPmid());
+									text, doc.getPmid(), doc.getPmid());
+					// System.out.println(uri);
+					document.setAbstract(doc.getDocumentAbstract());
 					rankOfDocument++;
 					document.addToIndexes();
 				}

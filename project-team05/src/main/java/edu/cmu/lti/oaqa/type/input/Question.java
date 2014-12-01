@@ -11,7 +11,7 @@ import org.apache.uima.jcas.tcas.Annotation;
 
 
 /** The Question and any associated meta-data.
- * Updated by JCasGen Sun Nov 30 20:57:13 EST 2014
+ * Updated by JCasGen Mon Dec 01 15:17:39 EST 2014
  * XML source: /Users/seanhan/workspace/bioQA/project-team05/src/main/resources/type/OAQATypes.xml
  * @generated */
 public class Question extends Annotation {

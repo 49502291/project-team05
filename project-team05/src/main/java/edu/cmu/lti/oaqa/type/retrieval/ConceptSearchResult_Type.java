@@ -13,7 +13,7 @@ import org.apache.uima.cas.impl.FeatureImpl;
 import org.apache.uima.cas.Feature;
 
 /** A search result from an ontology.
- * Updated by JCasGen Tue Nov 18 18:25:55 EST 2014
+ * Updated by JCasGen Sun Nov 30 20:57:13 EST 2014
  * @generated */
 public class ConceptSearchResult_Type extends AnswerSearchResult_Type {
   /** @generated 
@@ -68,6 +68,30 @@ public class ConceptSearchResult_Type extends AnswerSearchResult_Type {
     ll_cas.ll_setRefValue(addr, casFeatCode_concept, v);}
     
   
+ 
+  /** @generated */
+  final Feature casFeat_serviceType;
+  /** @generated */
+  final int     casFeatCode_serviceType;
+  /** @generated
+   * @param addr low level Feature Structure reference
+   * @return the feature value 
+   */ 
+  public String getServiceType(int addr) {
+        if (featOkTst && casFeat_serviceType == null)
+      jcas.throwFeatMissing("serviceType", "edu.cmu.lti.oaqa.type.retrieval.ConceptSearchResult");
+    return ll_cas.ll_getStringValue(addr, casFeatCode_serviceType);
+  }
+  /** @generated
+   * @param addr low level Feature Structure reference
+   * @param v value to set 
+   */    
+  public void setServiceType(int addr, String v) {
+        if (featOkTst && casFeat_serviceType == null)
+      jcas.throwFeatMissing("serviceType", "edu.cmu.lti.oaqa.type.retrieval.ConceptSearchResult");
+    ll_cas.ll_setStringValue(addr, casFeatCode_serviceType, v);}
+    
+  
 
 
 
@@ -83,6 +107,10 @@ public class ConceptSearchResult_Type extends AnswerSearchResult_Type {
  
     casFeat_concept = jcas.getRequiredFeatureDE(casType, "concept", "edu.cmu.lti.oaqa.type.kb.Concept", featOkTst);
     casFeatCode_concept  = (null == casFeat_concept) ? JCas.INVALID_FEATURE_CODE : ((FeatureImpl)casFeat_concept).getCode();
+
+ 
+    casFeat_serviceType = jcas.getRequiredFeatureDE(casType, "serviceType", "uima.cas.String", featOkTst);
+    casFeatCode_serviceType  = (null == casFeat_serviceType) ? JCas.INVALID_FEATURE_CODE : ((FeatureImpl)casFeat_serviceType).getCode();
 
   }
 }

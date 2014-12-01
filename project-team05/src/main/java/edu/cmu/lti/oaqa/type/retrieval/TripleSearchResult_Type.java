@@ -13,7 +13,7 @@ import org.apache.uima.cas.impl.FeatureImpl;
 import org.apache.uima.cas.Feature;
 
 /** A search result from a triple store, e.g., an RDF store.
- * Updated by JCasGen Tue Nov 18 18:25:55 EST 2014
+ * Updated by JCasGen Sun Nov 30 20:57:14 EST 2014
  * @generated */
 public class TripleSearchResult_Type extends AnswerSearchResult_Type {
   /** @generated 

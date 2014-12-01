@@ -13,8 +13,8 @@ import org.apache.uima.jcas.cas.TOP;
 
 
 /** A variant of a candidate answer.  A variant may have multiple occurrences, all of which are collected in a variant object.
- * Updated by JCasGen Tue Nov 18 18:25:54 EST 2014
- * XML source: /Users/seven/git/project-team05/project-team05/src/main/resources/descriptors/aggregateDescriptor.xml
+ * Updated by JCasGen Sun Nov 30 20:57:13 EST 2014
+ * XML source: /Users/seanhan/workspace/bioQA/project-team05/src/main/resources/type/OAQATypes.xml
  * @generated */
 public class CandidateAnswerVariant extends TOP {
   /** @generated

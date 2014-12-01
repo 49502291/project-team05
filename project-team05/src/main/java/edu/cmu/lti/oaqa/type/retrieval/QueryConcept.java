@@ -12,8 +12,8 @@ import org.apache.uima.jcas.cas.TOP;
 
 
 /** A query concept in the abstract search query model.
- * Updated by JCasGen Tue Nov 18 18:25:55 EST 2014
- * XML source: /Users/seven/git/project-team05/project-team05/src/main/resources/descriptors/aggregateDescriptor.xml
+ * Updated by JCasGen Sun Nov 30 20:57:13 EST 2014
+ * XML source: /Users/seanhan/workspace/bioQA/project-team05/src/main/resources/type/OAQATypes.xml
  * @generated */
 public class QueryConcept extends TOP {
   /** @generated

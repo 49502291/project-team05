@@ -10,8 +10,8 @@ import org.apache.uima.jcas.cas.TOP_Type;
 
 
 /** A document search result.
- * Updated by JCasGen Tue Nov 18 18:25:55 EST 2014
- * XML source: /Users/seven/git/project-team05/project-team05/src/main/resources/descriptors/aggregateDescriptor.xml
+ * Updated by JCasGen Sun Nov 30 20:57:13 EST 2014
+ * XML source: /Users/seanhan/workspace/bioQA/project-team05/src/main/resources/type/OAQATypes.xml
  * @generated */
 public class Document extends SearchResult {
   /** @generated
@@ -105,6 +105,28 @@ public class Document extends SearchResult {
     if (Document_Type.featOkTst && ((Document_Type)jcasType).casFeat_docId == null)
       jcasType.jcas.throwFeatMissing("docId", "edu.cmu.lti.oaqa.type.retrieval.Document");
     jcasType.ll_cas.ll_setStringValue(addr, ((Document_Type)jcasType).casFeatCode_docId, v);}    
+   
+    
+  //*--------------*
+  //* Feature: abstract
+
+  /** getter for abstract - gets 
+   * @generated
+   * @return value of the feature 
+   */
+  public String getAbstract() {
+    if (Document_Type.featOkTst && ((Document_Type)jcasType).casFeat_abstract == null)
+      jcasType.jcas.throwFeatMissing("abstract", "edu.cmu.lti.oaqa.type.retrieval.Document");
+    return jcasType.ll_cas.ll_getStringValue(addr, ((Document_Type)jcasType).casFeatCode_abstract);}
+    
+  /** setter for abstract - sets  
+   * @generated
+   * @param v value to set into the feature 
+   */
+  public void setAbstract(String v) {
+    if (Document_Type.featOkTst && ((Document_Type)jcasType).casFeat_abstract == null)
+      jcasType.jcas.throwFeatMissing("abstract", "edu.cmu.lti.oaqa.type.retrieval.Document");
+    jcasType.ll_cas.ll_setStringValue(addr, ((Document_Type)jcasType).casFeatCode_abstract, v);}    
   }
 
     

@@ -27,7 +27,7 @@ import edu.cmu.lti.oaqa.type.retrieval.QueryConcept;
 import edu.cmu.lti.oaqa.type.retrieval.SearchResult;
 import edu.cmu.lti.oaqa.type.retrieval.TripleSearchResult;
 
-public class TypeUtil {
+public class TypeUtil	 {
 
   public static Question getQuestion(JCas jcas) {
     return JCasUtil.selectSingle(jcas, Question.class);

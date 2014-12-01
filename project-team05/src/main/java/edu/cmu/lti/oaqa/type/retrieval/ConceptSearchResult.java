@@ -11,8 +11,8 @@ import edu.cmu.lti.oaqa.type.kb.Concept;
 
 
 /** A search result from an ontology.
- * Updated by JCasGen Tue Nov 18 18:25:55 EST 2014
- * XML source: /Users/seven/git/project-team05/project-team05/src/main/resources/descriptors/aggregateDescriptor.xml
+ * Updated by JCasGen Sun Nov 30 20:57:13 EST 2014
+ * XML source: /Users/seanhan/workspace/bioQA/project-team05/src/main/resources/type/OAQATypes.xml
  * @generated */
 public class ConceptSearchResult extends AnswerSearchResult {
   /** @generated
@@ -84,6 +84,28 @@ public class ConceptSearchResult extends AnswerSearchResult {
     if (ConceptSearchResult_Type.featOkTst && ((ConceptSearchResult_Type)jcasType).casFeat_concept == null)
       jcasType.jcas.throwFeatMissing("concept", "edu.cmu.lti.oaqa.type.retrieval.ConceptSearchResult");
     jcasType.ll_cas.ll_setRefValue(addr, ((ConceptSearchResult_Type)jcasType).casFeatCode_concept, jcasType.ll_cas.ll_getFSRef(v));}    
+   
+    
+  //*--------------*
+  //* Feature: serviceType
+
+  /** getter for serviceType - gets 
+   * @generated
+   * @return value of the feature 
+   */
+  public String getServiceType() {
+    if (ConceptSearchResult_Type.featOkTst && ((ConceptSearchResult_Type)jcasType).casFeat_serviceType == null)
+      jcasType.jcas.throwFeatMissing("serviceType", "edu.cmu.lti.oaqa.type.retrieval.ConceptSearchResult");
+    return jcasType.ll_cas.ll_getStringValue(addr, ((ConceptSearchResult_Type)jcasType).casFeatCode_serviceType);}
+    
+  /** setter for serviceType - sets  
+   * @generated
+   * @param v value to set into the feature 
+   */
+  public void setServiceType(String v) {
+    if (ConceptSearchResult_Type.featOkTst && ((ConceptSearchResult_Type)jcasType).casFeat_serviceType == null)
+      jcasType.jcas.throwFeatMissing("serviceType", "edu.cmu.lti.oaqa.type.retrieval.ConceptSearchResult");
+    jcasType.ll_cas.ll_setStringValue(addr, ((ConceptSearchResult_Type)jcasType).casFeatCode_serviceType, v);}    
   }
 
     

@@ -14,7 +14,11 @@ import org.apache.uima.cas.Feature;
 import org.apache.uima.jcas.cas.TOP_Type;
 
 /** A search result.
+<<<<<<< HEAD
  * Updated by JCasGen Sun Nov 30 19:21:56 EST 2014
+=======
+ * Updated by JCasGen Mon Dec 01 15:17:40 EST 2014
+>>>>>>> refs/remotes/origin/xiaohan
  * @generated */
 public class SearchResult_Type extends TOP_Type {
   /** @generated 
@@ -240,6 +244,30 @@ public class SearchResult_Type extends TOP_Type {
     ll_cas.ll_setRefArrayValue(ll_cas.ll_getRefValue(addr, casFeatCode_candidateAnswers), i, v);
   }
  
+ 
+  /** @generated */
+  final Feature casFeat_ServiceType;
+  /** @generated */
+  final int     casFeatCode_ServiceType;
+  /** @generated
+   * @param addr low level Feature Structure reference
+   * @return the feature value 
+   */ 
+  public String getServiceType(int addr) {
+        if (featOkTst && casFeat_ServiceType == null)
+      jcas.throwFeatMissing("ServiceType", "edu.cmu.lti.oaqa.type.retrieval.SearchResult");
+    return ll_cas.ll_getStringValue(addr, casFeatCode_ServiceType);
+  }
+  /** @generated
+   * @param addr low level Feature Structure reference
+   * @param v value to set 
+   */    
+  public void setServiceType(int addr, String v) {
+        if (featOkTst && casFeat_ServiceType == null)
+      jcas.throwFeatMissing("ServiceType", "edu.cmu.lti.oaqa.type.retrieval.SearchResult");
+    ll_cas.ll_setStringValue(addr, casFeatCode_ServiceType, v);}
+    
+  
 
 
 
@@ -279,6 +307,10 @@ public class SearchResult_Type extends TOP_Type {
  
     casFeat_candidateAnswers = jcas.getRequiredFeatureDE(casType, "candidateAnswers", "uima.cas.FSArray", featOkTst);
     casFeatCode_candidateAnswers  = (null == casFeat_candidateAnswers) ? JCas.INVALID_FEATURE_CODE : ((FeatureImpl)casFeat_candidateAnswers).getCode();
+
+ 
+    casFeat_ServiceType = jcas.getRequiredFeatureDE(casType, "ServiceType", "uima.cas.String", featOkTst);
+    casFeatCode_ServiceType  = (null == casFeat_ServiceType) ? JCas.INVALID_FEATURE_CODE : ((FeatureImpl)casFeat_ServiceType).getCode();
 
   }
 }

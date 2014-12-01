@@ -10,8 +10,11 @@ import org.apache.uima.cas.FeatureStructure;
 import org.apache.uima.cas.impl.TypeImpl;
 import org.apache.uima.cas.Type;
 
+import org.apache.uima.cas.impl.FeatureImpl;
+import org.apache.uima.cas.Feature;
+
 /** A search result where the candidate answer is obtained as part of the search process and saved in the text field of the search result.
- * Updated by JCasGen Sun Nov 30 19:21:56 EST 2014
+ * Updated by JCasGen Mon Dec 01 17:56:29 EST 2014
  * @generated */
 public class AnswerSearchResult_Type extends SearchResult_Type {
   /** @generated 
@@ -45,6 +48,32 @@ public class AnswerSearchResult_Type extends SearchResult_Type {
 
 
 
+  /** @generated */
+  final Feature casFeat_answer;
+  /** @generated */
+  final int     casFeatCode_answer;
+  /** @generated
+   * @param addr low level Feature Structure reference
+   * @return the feature value 
+   */ 
+  public String getAnswer(int addr) {
+        if (featOkTst && casFeat_answer == null)
+      jcas.throwFeatMissing("answer", "edu.cmu.lti.oaqa.type.retrieval.AnswerSearchResult");
+    return ll_cas.ll_getStringValue(addr, casFeatCode_answer);
+  }
+  /** @generated
+   * @param addr low level Feature Structure reference
+   * @param v value to set 
+   */    
+  public void setAnswer(int addr, String v) {
+        if (featOkTst && casFeat_answer == null)
+      jcas.throwFeatMissing("answer", "edu.cmu.lti.oaqa.type.retrieval.AnswerSearchResult");
+    ll_cas.ll_setStringValue(addr, casFeatCode_answer, v);}
+    
+  
+
+
+
   /** initialize variables to correspond with Cas Type and Features
 	 * @generated
 	 * @param jcas JCas
@@ -53,6 +82,10 @@ public class AnswerSearchResult_Type extends SearchResult_Type {
   public AnswerSearchResult_Type(JCas jcas, Type casType) {
     super(jcas, casType);
     casImpl.getFSClassRegistry().addGeneratorForType((TypeImpl)this.casType, getFSGenerator());
+
+ 
+    casFeat_answer = jcas.getRequiredFeatureDE(casType, "answer", "uima.cas.String", featOkTst);
+    casFeatCode_answer  = (null == casFeat_answer) ? JCas.INVALID_FEATURE_CODE : ((FeatureImpl)casFeat_answer).getCode();
 
   }
 }

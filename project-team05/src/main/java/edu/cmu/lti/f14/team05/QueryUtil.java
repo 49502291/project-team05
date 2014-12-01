@@ -27,15 +27,14 @@ import com.aliasi.tokenizer.TokenizerFactory;
 import com.aliasi.util.AbstractExternalizable;
 import com.aliasi.util.Streams;
 
+import edu.cmu.lti.oaqa.bio.bioasq.services.GoPubMedService;
+
 public class QueryUtil {
 	private static final String POSModelPath = "src/main/resources/models/pos-en-bio-genia.HiddenMarkovModel";
 	private static final int MAX_N_BEST_CHUNKS = 5;
 	private static List<String> stopWordList = null;
 
-	public QueryUtil() {
-	}
-
-	private static void readStopWords() {
+	public static List<String> readStopWords() {
 		File stopWordFile = new File("src/main/resources/stopwords.txt");
 		try {
 			stopWordList = new ArrayList<String>(Arrays.asList(FileUtils
@@ -44,6 +43,7 @@ public class QueryUtil {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		return stopWordList;
 	}
 
 	public static String preprocess(String oText) {
@@ -56,17 +56,26 @@ public class QueryUtil {
 
 		// 2. to lower case
 		oText = oText.toLowerCase();
+		
+		// 3. Only noun
+		oText = POS(oText, "NN");
+		
+		// 4. stemming
+		
+		//oText = StanfordLemmatizer.stemText(oText);
 
-		// 3. stemming
-		oText = StanfordLemmatizer.stemText(oText);
-
-		// 4. remove stop words
+		// 5. remove stop words
 		String[] textList = oText.split("\\s+");
 		StringBuilder newStr = new StringBuilder();
 		for (int i = 0; i < textList.length; i++) {
-			textList[i] = StanfordLemmatizer.stemWord(textList[i]);
+			//textList[i] = StanfordLemmatizer.stemWord(textList[i]);
 			if (!stopWordList.contains(textList[i])) {
-				newStr.append(textList[i] + " ");
+				String stemStr = StanfordLemmatizer.stemWord(textList[i]);
+				if (!stemStr.equals(textList[i])) {
+					newStr.append("(" + stemStr + " OR " + textList[i] + ")  ");
+				} else {
+					newStr.append(textList[i] + " ");
+				}
 			}
 		}
 		oText = newStr.toString().trim();
@@ -95,7 +104,7 @@ public class QueryUtil {
 		System.out.println("Chunking=" + chunking);
 	}
 
-	public static String POS(String oText) {
+	public static String POS(String oText, String type) {
 
 		FileInputStream fileIn = null;
 		try {
@@ -129,9 +138,29 @@ public class QueryUtil {
 		List<String> tokenList = Arrays.asList(tokens);
 		Tagging<String> tagging = decoder.tag(tokenList);
 		StringBuilder result = new StringBuilder();
-		
+		StringBuilder concept = new StringBuilder();
+		boolean first = true;
 		for (int i = 0; i < tagging.size(); ++i) {
-			result.append(tagging.token(i) + "_" + tagging.tag(i) + " ");
+			if (tagging.tag(i).indexOf(type) > -1) {
+				concept.append(tagging.token(i) + " ");
+				if (i < tagging.size()-1) {
+					if (tagging.tag(i+1).indexOf(type) == -1) {
+						String newConcept = ConceptAnnotator.identifySingleConcept(concept.toString());
+						System.out.println("NEW:" + newConcept + " OLD:" + concept.toString());
+						if (!first) {
+							result.append("|");
+						} else {
+							first = false;
+						}
+						result.append("\"" + newConcept + "\"");
+						concept = new StringBuilder();
+					}
+				} else {
+					String newConcept = ConceptAnnotator.identifySingleConcept(concept.toString());
+					System.out.println("NEW:" + newConcept + " OLD:" + concept.toString());
+					result.append("|\"" + newConcept + "\"");
+				}
+			}
 		}
 		return result.toString();
 	}

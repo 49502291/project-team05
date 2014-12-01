@@ -68,6 +68,7 @@ public class BioConsumer extends CasConsumer_ImplBase {
 		if (!documentList.isEmpty()){
 			for (Document doc: documentList){
 				documents.add(doc.getUri());
+
 			}
 		}			
 		Collection<ConceptSearchResult> conceptCollection = TypeUtil.getRankedConceptSearchResults(jcas);
@@ -77,6 +78,7 @@ public class BioConsumer extends CasConsumer_ImplBase {
 		if (!conceptList.isEmpty()){
 			for (ConceptSearchResult concept: conceptList){
 				concepts.add(concept.getUri());
+
 			}
 		}	
 		Collection<TripleSearchResult> tripleCollection = TypeUtil.getRankedTripleSearchResults(jcas);

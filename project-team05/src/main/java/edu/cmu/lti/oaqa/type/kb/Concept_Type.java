@@ -14,7 +14,7 @@ import org.apache.uima.cas.Feature;
 import org.apache.uima.jcas.cas.TOP_Type;
 
 /** A superclass for EntityConcept and RelationConcept.
- * Updated by JCasGen Sun Nov 30 03:03:32 EST 2014
+ * Updated by JCasGen Sun Nov 30 20:52:18 EST 2014
  * @generated */
 public class Concept_Type extends TOP_Type {
   /** @generated 

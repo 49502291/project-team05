@@ -13,7 +13,7 @@ import org.apache.uima.cas.impl.FeatureImpl;
 import org.apache.uima.cas.Feature;
 
 /** A search result from an ontology.
- * Updated by JCasGen Sun Nov 30 03:03:33 EST 2014
+ * Updated by JCasGen Sun Nov 30 20:52:19 EST 2014
  * @generated */
 public class ConceptSearchResult_Type extends AnswerSearchResult_Type {
   /** @generated 

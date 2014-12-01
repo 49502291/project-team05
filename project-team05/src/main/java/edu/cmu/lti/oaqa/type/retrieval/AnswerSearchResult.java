@@ -10,7 +10,7 @@ import org.apache.uima.jcas.cas.TOP_Type;
 
 
 /** A search result where the candidate answer is obtained as part of the search process and saved in the text field of the search result.
- * Updated by JCasGen Sun Nov 30 03:03:33 EST 2014
+ * Updated by JCasGen Sun Nov 30 20:52:19 EST 2014
  * XML source: /Users/seven/git/project-team05/project-team05/src/main/resources/type/OAQATypes.xml
  * @generated */
 public class AnswerSearchResult extends SearchResult {
@@ -65,7 +65,6 @@ public class AnswerSearchResult extends SearchResult {
   //* Feature: answer
 
   /** getter for answer - gets Exact answer
-
    * @generated
    * @return value of the feature 
    */
@@ -74,8 +73,7 @@ public class AnswerSearchResult extends SearchResult {
       jcasType.jcas.throwFeatMissing("answer", "edu.cmu.lti.oaqa.type.retrieval.AnswerSearchResult");
     return jcasType.ll_cas.ll_getStringValue(addr, ((AnswerSearchResult_Type)jcasType).casFeatCode_answer);}
     
-  /** setter for answer - sets Exact answer
- 
+  /** setter for answer - sets Exact answer 
    * @generated
    * @param v value to set into the feature 
    */

@@ -159,12 +159,20 @@ public class SnippetAnnotator extends JCasAnnotator_ImplBase {
 	        Gson gson =new Gson();
 	        FullDocument fd =gson.fromJson(content, FullDocument.class);
 	     	        
+	        String title = fd.getTitle();
+	        
+	    	Passage snippetTitle = TypeFactory.createPassage(aJCas, fullURL, title, 0, title.length()-1, "title", "title");
+			
+			snippetTitle.addToIndexes(); 	
+	        
+	        
 	        for(int i =0 ; i<fd.getSections().size() ; i++)
 	        {
 	        	String section = fd.getSections().get(i);
 	        	
 	        	List<String> sentences = tokenize1(section);
 	        	
+      	
 	        	int offsetInBeginSection = 0;
 	            
 	        	for(int j =0 ; j<sentences.size(); j++)

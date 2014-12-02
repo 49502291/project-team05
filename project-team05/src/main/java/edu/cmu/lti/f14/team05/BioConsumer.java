@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 import json.JsonCollectionReaderHelper;
+import json.gson.QuestionType;
 import json.gson.Snippet;
 import json.gson.TestQuestion;
 import json.gson.Triple;
@@ -26,6 +27,7 @@ import org.apache.uima.resource.ResourceProcessException;
 import org.apache.uima.util.ProcessTrace;
 
 import util.TypeUtil;
+import edu.cmu.lti.oaqa.type.answer.Answer;
 import edu.cmu.lti.oaqa.type.input.Question;
 import edu.cmu.lti.oaqa.type.retrieval.ConceptSearchResult;
 import edu.cmu.lti.oaqa.type.retrieval.Document;
@@ -107,7 +109,21 @@ public class BioConsumer extends CasConsumer_ImplBase {
 				//System.out.println("Test:" + gson.toJson(tempSnippet));
 			}			
 		}
-		exactAnswer.add(new ExactAnswer(queryId,queryText,documents,concepts,triples,snippets));
+		Collection<Answer> answerCollection = TypeUtil.getAnswers(jcas);
+		ArrayList<Answer> answerList = new ArrayList<Answer>();
+		answerList.addAll(answerCollection);
+		List<List<String>> answers = new ArrayList<List<String>>();
+		if(!answerList.isEmpty()){
+			for(Answer ans : answerList){
+				List<String> line = new ArrayList<String>();
+				line.add(ans.getText());
+				answers.add(line);
+			}
+		}
+		// type = new QuestionType();
+		ExactAnswer tempAns = new ExactAnswer(queryId,queryText,QuestionType.list,documents,
+				snippets,concepts,triples,answers);
+		exactAnswer.add(tempAns);
 //		 Gson gson = new Gson();
 //			System.out.println(gson.toJson(exactAnswer.get(exactAnswer.size()-1)));
 	}

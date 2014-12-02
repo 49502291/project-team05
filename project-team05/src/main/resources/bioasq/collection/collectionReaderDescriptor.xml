@@ -20,13 +20,13 @@
       <nameValuePair>
         <name>inputFile</name>
         <value>
-          <string>/oneQuestion.json</string>
+          <string>/input/questions.json</string>
         </value>
       </nameValuePair>
     </configurationParameterSettings>
     <typeSystemDescription>
       <imports>
-        <import name="type.OAQATypes"/>
+        <import name="bioasq.type.OAQATypes"/>
       </imports>
     </typeSystemDescription>
     <typePriorities/>

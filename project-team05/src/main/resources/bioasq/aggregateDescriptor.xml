@@ -4,19 +4,19 @@
   <primitive>false</primitive>  
   <delegateAnalysisEngineSpecifiers>
     <delegateAnalysisEngine key="DocumentDescriptor">
-      <import location="DocumentDescriptor.xml"/>
+      <import location="documents/DocumentDescriptor.xml"/>
     </delegateAnalysisEngine>
     <delegateAnalysisEngine key="ConceptDescriptor">
-      <import location="ConceptDescriptor.xml"/>
+      <import location="concepts/ConceptDescriptor.xml"/>
     </delegateAnalysisEngine>
   <delegateAnalysisEngine key="TripleDescriptor">
-      <import location="TripleDescriptor.xml"/>
+      <import location="triple/TripleDescriptor.xml"/>
     </delegateAnalysisEngine>
     <delegateAnalysisEngine key="SnippetDescriptor">
-      <import location="SnippetDescriptor.xml"/>
+      <import location="snippet/SnippetDescriptor.xml"/>
     </delegateAnalysisEngine>
   <delegateAnalysisEngine key="ExactAnswerDescriptor">
-      <import name="descriptors.ExactAnswerDescriptor"/>
+      <import location="answer/ExactAnswerDescriptor.xml"/>
     </delegateAnalysisEngine>
   </delegateAnalysisEngineSpecifiers>
   <analysisEngineMetaData>

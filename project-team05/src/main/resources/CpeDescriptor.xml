@@ -2,7 +2,7 @@
     <collectionReader>
         <collectionIterator>
             <descriptor>
-                <import location="descriptors/collectionReaderDescriptor.xml"/>
+                <import location="bioasq/collection/collectionReaderDescriptor.xml"/>
             </descriptor>
             <configurationParameterSettings>
                 <nameValuePair>
@@ -17,7 +17,7 @@
     <casProcessors casPoolSize="3" processingUnitThreadCount="1">
         <casProcessor deployment="integrated" name="aeDescriptor">
             <descriptor>
-                <import location="descriptors/aggregateDescriptor.xml"/>
+                <import location="bioasq/aggregateDescriptor.xml"/>
             </descriptor>
             <deploymentParameters/>
             <errorHandling>
@@ -29,7 +29,7 @@
         </casProcessor>
         <casProcessor deployment="integrated" name="casConsumerDescriptor">
             <descriptor>
-                <import location="descriptors/casConsumerDescriptor.xml"/>
+                <import location="bioasq/consumer/casConsumerDescriptor.xml"/>
             </descriptor>
             <deploymentParameters/>
             <errorHandling>

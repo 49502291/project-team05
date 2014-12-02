@@ -74,6 +74,8 @@ public class ExactAnswerAnnotator extends JCasAnnotator_ImplBase {
 		Question question = (Question) itQuestion.next();
 		String type = question.getQuestionType();
 		String questionText = question.getText();
+		questionText = preprocess(questionText);
+		
 		if(type != "LIST")
 			return;
 		
@@ -153,9 +155,12 @@ public class ExactAnswerAnnotator extends JCasAnnotator_ImplBase {
 
 					if(conf > 0.6)
 					{
-						String answer = text.substring(chunk.start(), chunk.end());
+						String result = text.substring(chunk.start(), chunk.end());
+						String answer = result;
+						result = preprocess(result);
 						
-						if(questionText.indexOf(answer) == -1){
+						
+						if(questionText.indexOf(result) == -1){
 						Answer exactAnswer = TypeFactory.createAnswer(aJCas, answer);
 						exactAnswer.addToIndexes();
 						
@@ -189,9 +194,12 @@ public class ExactAnswerAnnotator extends JCasAnnotator_ImplBase {
 
 					if(conf > 0.6)
 					{
-						String answer = text.substring(chunk.start(), chunk.end());
+						String result = text.substring(chunk.start(), chunk.end());
+						String answer = result;
+						result = preprocess(result);
 						
-						if(questionText.indexOf(answer) == -1){
+						
+						if(questionText.indexOf(result) == -1){
 						Answer exactAnswer = TypeFactory.createAnswer(aJCas, answer);
 						exactAnswer.addToIndexes();
 						

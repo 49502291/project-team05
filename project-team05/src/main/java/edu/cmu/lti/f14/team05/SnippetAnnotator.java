@@ -184,7 +184,7 @@ public class SnippetAnnotator extends JCasAnnotator_ImplBase {
         			
 	        		//Set threshold
 	        		
-	        		if(similarity > 0.25)
+	        		if(similarity > 0.3)
 	        		{
 	        			String beginSection = "sections." +i;
 	        			String endSection ="sections." +i;

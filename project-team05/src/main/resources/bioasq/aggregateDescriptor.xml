@@ -16,7 +16,7 @@
       <import location="snippet/SnippetDescriptor.xml"/>
     </delegateAnalysisEngine>
   <delegateAnalysisEngine key="ExactAnswerDescriptor">
-      <import location="answer/ExactAnswerDescriptor"/>
+      <import location="answer/ExactAnswerDescriptor.xml"/>
     </delegateAnalysisEngine>
   </delegateAnalysisEngineSpecifiers>
   <analysisEngineMetaData>

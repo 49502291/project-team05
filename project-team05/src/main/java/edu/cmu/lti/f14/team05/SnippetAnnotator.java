@@ -188,7 +188,7 @@ public class SnippetAnnotator extends JCasAnnotator_ImplBase {
 	        		{
 	        			String beginSection = "sections." +i;
 	        			String endSection ="sections." +i;
-	        			String document =fullURL;
+	        			String document ="http://www.ncbi.nlm.nih.gov/pubmed/"+PMID;
 //	        			String text = sentence;
 	        			
 	        			Passage snippet = TypeFactory.createPassage(aJCas, document, text, offsetBegin, offsetEnd, beginSection, endSection);

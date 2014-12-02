@@ -49,12 +49,12 @@ public class Evaluator {
 	    List<EvaluationResult> triplesEval = new ArrayList<EvaluationResult>();
 	    List<EvaluationResult> snippetsEval = new ArrayList<EvaluationResult>();
 	    List<EvaluationResult> answersEval = new ArrayList<EvaluationResult>();
-		for (Question q: testAnswer){
-			evalResult +="Question: "+ q.getBody();
-			evalResult +="Question Type: "+ q.getType();
+		for (Question q: testAnswer){		
+			evalResult +="Question: "+ q.getBody() + "\n";
+			evalResult +="Question Type: "+ q.getType() + "\n";
 			boolean exist = false;
 			for (Question question : goldStandards) {
-				if(question.equals(q.getId())){
+				if(question.getId().equals(q.getId())){
 					exist = true;
 				}
 			}

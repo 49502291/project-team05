@@ -101,11 +101,15 @@ public class BioConsumer extends CasConsumer_ImplBase {
 		ArrayList<Snippet> snippets = new ArrayList<Snippet>();
 		if(!snippetList.isEmpty()){
 			for (Passage snip : snippetList) {
-				snippets.add(new Snippet(snip.getUri(),snip.getText(),snip.getOffsetInBeginSection(),
-				snip.getOffsetInEndSection(),snip.getBeginSection(),snip.getEndSection()));
-			}
+				Snippet tempSnippet = new Snippet(snip.getUri(),snip.getText(),snip.getOffsetInBeginSection(),
+						snip.getOffsetInEndSection(),snip.getBeginSection(),snip.getEndSection());
+				snippets.add(tempSnippet);
+				//System.out.println("Test:" + gson.toJson(tempSnippet));
+			}			
 		}
 		exactAnswer.add(new ExactAnswer(queryId,queryText,documents,concepts,triples,snippets));
+//		 Gson gson = new Gson();
+//			System.out.println(gson.toJson(exactAnswer.get(exactAnswer.size()-1)));
 	}
 	
 	@Override
